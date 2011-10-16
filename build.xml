@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'utf-8'?>
+
+<project name="othello" basedir="." default="main">
+
+    <property name="othello.dir" value="framework"/>
+    <property name="src.dir"     value="apps"/>
+    <property name="lib.dir"     value="lib"/>
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="lib"/>
+    <property name="war.dir"     value="release"/>
+    <property name="app.dir"     value="apps/hello_world"/>
+    <property name="app.name"    value="hello_world"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${jar.dir}/${app.name}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}" excludes="**/*.java"/>
+        </copy>
+        <copy todir="${classes.dir}">
+            <fileset dir="${othello.dir}" excludes="**/*.java"/>
+        </copy>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>
+        <javac srcdir="${othello.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}/${app.name}"/>
+        <jar destfile="${jar.dir}/${app.name}/${app.name}.jar" basedir="${classes.dir}"/>
+    </target>
+
+    <target name="war" depends="jar">
+        <delete dir="${build.dir}/tmp"/>
+
+        <mkdir dir="${build.dir}/tmp"/>
+        <mkdir dir="${war.dir}"/>
+
+        <copy todir="${build.dir}/tmp" preservelastmodified="true">
+            <fileset dir="${app.dir}">
+                <exclude name="**/*.java"/>
+                <include name="**/**"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${build.dir}/tmp/WEB-INF/lib" preservelastmodified="true" flatten="true">
+            <fileset dir="${lib.dir}">
+                <include name="**/*.jar" />
+                <include name="**/*.zip" />
+            </fileset>
+        </copy>
+
+        <jar destfile="${war.dir}/${app.name}.war" basedir="${build.dir}/tmp" />
+
+        <delete dir="${build.dir}/tmp"/>
+    </target>
+
+    <target name="clean-build" depends="clean,jar"/>
+
+    <target name="main" depends="clean,war">
+        <echo>Congrats, you just built your app!</echo>
+    </target>
+
+</project>
