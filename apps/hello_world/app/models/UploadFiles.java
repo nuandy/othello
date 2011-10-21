@@ -13,9 +13,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class UploadFiles {
 
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = Logger.getLogger("UploadFiles");
 
-    public void upload(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public static void upload(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
         if (!isMultipart) {
@@ -38,7 +38,7 @@ public class UploadFiles {
                     try {
                         String itemName = item.getName();
                         if (itemName.length() > 0) {
-                            File savedFile = File.createTempFile("hello-", ".jpg", new File("/web/othello/apps/hello_world/public/images"));
+                            File savedFile = File.createTempFile("hello-", ".jpg", new File(System.getProperty("user.dir")+"/apps/hello_world/public/images"));
                             item.write(savedFile);
                         }
                     } catch (Exception e) {

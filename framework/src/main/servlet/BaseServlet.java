@@ -1,6 +1,7 @@
 package src.main.servlet;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.lang.reflect.Method;
@@ -8,7 +9,7 @@ import org.apache.log4j.*;
 
 public class BaseServlet extends HttpServlet {
 
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = Logger.getLogger("BaseServlet");
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         invokeDo(request, response, request.getMethod().toUpperCase(), request.getServletPath());
@@ -21,15 +22,20 @@ public class BaseServlet extends HttpServlet {
             Object object = appController.newInstance();
             for (Method method : methods) {
                 if (method.getName().startsWith("do")) {
-                    method.invoke(object, request, response);
+                    try {
+                        method.invoke(object, request, response);
+                    } catch (InvocationTargetException x) {
+                        Throwable cause = x.getCause();
+                        logger.error(cause.getMessage());
+                    }
                 }
             }
         } catch (Exception e) {
-            logger.warn(e);
+            logger.error(e);
         }
     }
 
-    public static String capitalizeFirstLetters(String s) {
+    private static String capitalizeFirstLetters(String s) {
         for (int i = 0; i < s.length(); i++) {
             if (i == 0) {
                 s = String.format("%s%s", Character.toUpperCase(s.charAt(0)), s.substring(1));

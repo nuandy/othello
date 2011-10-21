@@ -8,14 +8,14 @@ import hello_world.app.models.UploadFiles;
 
 public class Upload {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static Logger logger = Logger.getLogger("Upload");
 
-  public void initUpload(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+  public static void initUpload(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
       UploadFiles upf = new UploadFiles();
       upf.upload(request, response);
   }
 
-  public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+  public static void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
       initUpload(request, response);
       RequestDispatcher view = request.getRequestDispatcher("app/views/upload.jsp");
       view.forward(request, response);
