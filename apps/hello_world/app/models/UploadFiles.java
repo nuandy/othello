@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Iterator;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import hello_world.app.models.Insert;
 import org.apache.log4j.*;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -40,6 +41,8 @@ public class UploadFiles {
                         if (itemName.length() > 0) {
                             File savedFile = File.createTempFile("hello-", ".jpg", new File(System.getProperty("user.dir")+"/apps/hello_world/public/images"));
                             item.write(savedFile);
+                            Insert sql = new Insert();
+                            sql.insert("images", "image_path", savedFile.getPath());
                         }
                     } catch (Exception e) {
                         logger.error(e);
