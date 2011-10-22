@@ -12,7 +12,6 @@ public class Jdbc {
             Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
             logger.warn("PostgreSQL JDBC Driver Missing");
-		    e.printStackTrace();
 		}
  
         logger.warn("PostgreSQL JDBC Driver Registered"); 
@@ -23,7 +22,6 @@ public class Jdbc {
             connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/my_database_name", "username", "password");
         } catch (SQLException e) {
             logger.warn("Connection Failed");
-		    e.printStackTrace();
 		}
  
 		if (connection != null) {
