@@ -26,11 +26,20 @@
         <copy todir="${classes.dir}">
             <fileset dir="${src.dir}" excludes="**/*.java"/>
         </copy>
-        <copy todir="${classes.dir}">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>
+    </target>
+
+    <target name="compile-framework">
+        <mkdir dir="${classes.dir}/${ant.project.name}"/>
+        <copy todir="${classes.dir}/${ant.project.name}">
             <fileset dir="${othello.dir}" excludes="**/*.java"/>
         </copy>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>
-        <javac srcdir="${othello.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>
+        <javac srcdir="${othello.dir}" destdir="${classes.dir}/${ant.project.name}" classpathref="classpath" includeantruntime="false"/>
+    </target>
+
+    <target name="jar-framework" depends="compile-framework">
+        <mkdir dir="${jar.dir}/${app.name}"/>
+        <jar destfile="${jar.dir}/${ant.project.name}/${ant.project.name}.jar" basedir="${classes.dir}/${ant.project.name}"/>
     </target>
 
     <target name="jar" depends="compile">
@@ -38,7 +47,7 @@
         <jar destfile="${jar.dir}/${app.name}/${app.name}.jar" basedir="${classes.dir}"/>
     </target>
 
-    <target name="war" depends="jar">
+    <target name="war" depends="jar-framework,jar">
         <delete dir="${build.dir}/tmp"/>
 
         <mkdir dir="${build.dir}/tmp"/>
