@@ -5,8 +5,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import org.apache.log4j.*;
 import hello_world.app.models.UploadFiles;
+import src.main.othello.web.controller.impl.AbstractController;
 
-public class Upload {
+public class Upload extends AbstractController {
 
   private static Logger logger = Logger.getLogger("Upload");
 
@@ -15,10 +16,9 @@ public class Upload {
       upf.upload(request, response);
   }
 
-  public static void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+  public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
       initUpload(request, response);
-      RequestDispatcher view = request.getRequestDispatcher("app/views/upload.jsp");
-      view.forward(request, response);
+      super.forward("app/views/upload.jsp", request, response);
   }
 
 }
