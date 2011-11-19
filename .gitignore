@@ -2,5 +2,7 @@
 build
 release
 server/logs
+framework/src/main/othello
+lib/othello
 *.iml
 */**hello_world.jar
