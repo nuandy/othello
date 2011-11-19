@@ -5,9 +5,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import org.apache.log4j.*;
 import hello_world.app.models.UploadFiles;
-import src.main.othello.web.controller.impl.AbstractController;
+import src.main.othello.web.controller.impl.AbstractControllerImpl;
 
-public class Upload extends AbstractController {
+public class Upload extends AbstractControllerImpl {
 
   private static Logger logger = Logger.getLogger("Upload");
 
