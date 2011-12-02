@@ -1,0 +1,7 @@
+.idea
+build
+release
+server/logs
+lib/othello
+*.iml
+*/**hello_world.jar
