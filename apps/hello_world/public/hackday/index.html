@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/stylesheets/jquery.mobile-1.0.min.css" />
+  <link rel="stylesheet" href="assets/stylesheets/main.css" />
+  <script type="text/javascript" src="assets/javascripts/jquery-1.6.4.min.js"></script>
+  <script type="text/javascript" src="assets/javascripts/jquery.mobile-1.0.min.js"></script>
+  <script type="text/javascript" src="assets/javascripts/yqlgeo.js"></script>
+  <script>
+    $(window).ready(function() {
+      $('#btnInit').click(initiate_geolocation);
+    });
+
+    function initiate_geolocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(handle_geolocation_query, handle_errors);
+      } else {
+        yqlgeo.get('visitor', normalize_yql_response);
+      }
+    }
+
+    function handle_errors(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          $.mobile.changePage("#onError", {
+            transition: 'pop', role: 'dialog'
+          });
+        break;
+        case error.POSITION_UNAVAILABLE:
+          $.mobile.changePage("#onError", {
+            transition: 'flip', role: 'dialog'
+          });
+        break;
+        case error.TIMEOUT:
+          $.mobile.changePage("#onError", {
+            transition: 'flip', role: 'dialog'
+          });
+        break;
+        default:
+          $.mobile.changePage("#onError", {
+            transition: 'flip', role: 'dialog'
+          });
+        break;
+      }
+    }
+
+    function normalize_yql_response(response) {
+      if (response.error) {
+        var error = { code : 0 };
+        handle_error(error);
+        return;
+      }
+
+      var position = {
+        coords : {
+          latitude: response.place.centroid.latitude,
+          longitude: response.place.centroid.longitude
+        },
+        address : {
+          city: response.place.locality2.content,
+          region: response.place.admin1.content,
+          country: response.place.country.content
+        }
+      };
+
+      handle_geolocation_query(position);
+    }
+
+    function handle_geolocation_query(position) {
+      //alert('Lat: ' + position.coords.latitude + ' ' + 'Lon: ' + position.coords.longitude);
+      $.mobile.changePage('success.html', {
+        transition: 'flip',
+        role: 'dialog',
+        data: position.coords.latitude,
+        type: 'get'
+      });
+    }
+
+    $('#onSuccess').live('pagebeforecreate', function(event) {
+      var latitude = $(this).attr("data-url");
+      $('#onSuccess #content').html('<p>'+latitude+'</p>');
+    });
+
+    </script>
+  </head>
+  <body>
+    <div id="homepage" data-role="page">
+      <div data-role="header">
+        <h1>Gwumpy</h1>
+      </div>
+      <div data-role="content">
+        <button id="btnInit">Find my location</button>
+      </div>
+      <div data-role="footer">
+        <h1>&copy; 2011 The Gwumpy Team</h1>
+      </div>
+    </div>
+    <div id="onError" data-role="page">
+      <div data-role="header"><h1>Oops...</h1></div>
+      <div data-role="content">
+        <p>We could not determine your location for some reason. Make sure you give us permission by changing your browser settings or try again later.</p>
+      </div>
+    </div>
+  </body>
+</html>
