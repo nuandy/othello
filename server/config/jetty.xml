@@ -149,7 +149,7 @@
     <!-- Normally only one type of deployer need be used.            -->
     <!--                                                             -->
     <!-- =========================================================== -->
-    <Call name="addLifeCycle">
+    <!--Call name="addLifeCycle">
       <Arg>
         <New class="org.mortbay.jetty.deployer.WebAppDeployer">
           <Set name="contexts"><Ref id="Contexts"/></Set>
@@ -160,7 +160,7 @@
           <Set name="defaultsDescriptor"><SystemProperty name="jetty.home" default="."/>/server/config/webdefault.xml</Set>
         </New>
       </Arg>
-    </Call>
+    </Call-->
 
     <!-- =========================================================== -->
     <!-- Configure Authentication Realms                             -->

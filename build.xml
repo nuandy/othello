@@ -1,4 +1,4 @@
-<?xml version = '1.0' encoding = 'utf-8'?>
+<?xml version = "1.0" encoding = "utf-8"?>
 
 <project name="othello" basedir="." default="main">
 
@@ -9,8 +9,10 @@
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="lib"/>
     <property name="war.dir"     value="release"/>
-    <property name="app.dir"     value="apps/hello_world"/>
-    <property name="app.name"    value="hello_world"/>
+    <property name="app1.dir"    value="apps/test"/>
+    <property name="app1.name"   value="test"/>
+    <property name="app2.dir"    value="apps/hello_world"/>
+    <property name="app2.name"   value="hello_world"/>
 
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
@@ -18,7 +20,8 @@
 
     <target name="clean">
         <delete dir="${build.dir}"/>
-        <delete dir="${jar.dir}/${app.name}"/>
+        <delete dir="${jar.dir}/${app1.name}"/>
+        <delete dir="${jar.dir}/${app2.name}"/>
     </target>
 
     <target name="compile">
@@ -38,13 +41,16 @@
     </target>
 
     <target name="jar-framework" depends="compile-framework">
-        <mkdir dir="${jar.dir}/${app.name}"/>
+        <mkdir dir="${jar.dir}/${app1.name}"/>
+        <mkdir dir="${jar.dir}/${app2.name}"/>
         <jar destfile="${jar.dir}/${ant.project.name}/${ant.project.name}.jar" basedir="${classes.dir}/${ant.project.name}"/>
     </target>
 
     <target name="jar" depends="compile">
-        <mkdir dir="${jar.dir}/${app.name}"/>
-        <jar destfile="${jar.dir}/${app.name}/${app.name}.jar" basedir="${classes.dir}"/>
+        <mkdir dir="${jar.dir}/${app1.name}"/>
+        <mkdir dir="${jar.dir}/${app2.name}"/>
+        <jar destfile="${jar.dir}/${app1.name}/${app1.name}.jar" basedir="${classes.dir}"/>
+        <jar destfile="${jar.dir}/${app2.name}/${app2.name}.jar" basedir="${classes.dir}"/>
     </target>
 
     <target name="war" depends="jar-framework,jar">
@@ -54,7 +60,14 @@
         <mkdir dir="${war.dir}"/>
 
         <copy todir="${build.dir}/tmp" preservelastmodified="true">
-            <fileset dir="${app.dir}">
+            <fileset dir="${app1.dir}">
+                <exclude name="**/*.java"/>
+                <include name="**/**"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${build.dir}/tmp" preservelastmodified="true">
+            <fileset dir="${app2.dir}">
                 <exclude name="**/*.java"/>
                 <include name="**/**"/>
             </fileset>
@@ -67,7 +80,8 @@
             </fileset>
         </copy>
 
-        <jar destfile="${war.dir}/${app.name}.war" basedir="${build.dir}/tmp" />
+        <jar destfile="${war.dir}/${app1.name}.war" basedir="${build.dir}/tmp" />
+        <jar destfile="${war.dir}/${app2.name}.war" basedir="${build.dir}/tmp" />
 
         <delete dir="${build.dir}/tmp"/>
     </target>
@@ -75,7 +89,7 @@
     <target name="clean-build" depends="clean,jar"/>
 
     <target name="main" depends="clean,war">
-        <echo>Congrats, you just built your app!</echo>
+        <echo>Congrats, you just built your app(s)!</echo>
     </target>
 
 </project>
