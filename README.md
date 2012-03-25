@@ -1,9 +1,11 @@
 Othello is a MVC Java web framework.
 
-To build the hello_world app:
+Assuming Othello is installed under /web/othello.
+
+To build all apps in the /web/othello/apps directory:
 
 1. cd /web/othello
-2. ant
+2. python othello.py
 
 To start the server:
 
