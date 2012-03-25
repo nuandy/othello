@@ -34,7 +34,7 @@
   </servlet-mapping>
 
   <context-param>
-    <description>Unique App Key</description> 
+    <description>Unique App Key</description>
     <param-name>app.key</param-name>
     <param-value>hello_world</param-value>
   </context-param>

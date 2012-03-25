@@ -20,7 +20,7 @@
 
   <!-- The Usual Welcome File List -->
   <welcome-file-list>
-    <welcome-file>app/views/upload.jsp</welcome-file>
+    <welcome-file>app/views/test.jsp</welcome-file>
   </welcome-file-list>
 
   <servlet>
@@ -30,11 +30,11 @@
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/upload</url-pattern>
+    <url-pattern>/test</url-pattern>
   </servlet-mapping>
 
   <context-param>
-    <description>Unique App Key</description> 
+    <description>Unique App Key</description>
     <param-name>app.key</param-name>
     <param-value>test</param-value>
   </context-param>

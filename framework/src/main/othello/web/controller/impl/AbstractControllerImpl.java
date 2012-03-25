@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class AbstractControllerImpl implements Controller {
     public void forward(String jsp, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        RequestDispatcher view = request.getRequestDispatcher("app/views/upload.jsp");
+        RequestDispatcher view = request.getRequestDispatcher(jsp);
         view.forward(request, response);
     }
 }
