@@ -16,8 +16,7 @@ To tell the server which app to run:
 
 1. cd /web/othello/contexts
 2. Open context.xml
-3. Edit this: <Set name="war"><SystemProperty name="jetty.home" default="."/>/release/hello_world.war</Set>
-4. Replace "release/hello_world.war" with "release/foo.war", where "foo.war" is the app you want to run.
+3. Replace "release/hello_world.war" with "release/foo.war", where "foo.war" is the app you want to run.
 
 To start the server:
 
