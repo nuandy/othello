@@ -1,5 +1,6 @@
 .idea
 build
+build.xml
 release
 server/logs
 lib/othello
