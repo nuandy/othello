@@ -59,12 +59,12 @@
 
   <error-page>
     <error-code>404</error-code>
-    <location>app/views/http_status/404.html</location>
+    <location>/app/views/http_status/404.html</location>
   </error-page>
 
   <error-page>
     <error-code>500</error-code>
-    <location>app/views/http_status/500.html</location>
+    <location>/app/views/http_status/500.html</location>
   </error-page>
 
 </web-app>
