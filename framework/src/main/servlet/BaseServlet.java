@@ -52,6 +52,7 @@ public class BaseServlet extends HttpServlet {
     private String getClassName(String pattern) {
         String appKey = getServletContext().getInitParameter("app.key");
         String servletName = pattern.replace("/","");
+        servletName = servletName.replace(".jsp","");
         String servletNameCaps = capitalizeFirstLetters(servletName);
         String controllerName = servletNameCaps.replace("_","").replace(".","").replace("-","");
         return appKey+".app.controllers."+controllerName;

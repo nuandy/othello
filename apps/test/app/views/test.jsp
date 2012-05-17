@@ -5,6 +5,6 @@
     <title>Test App</title>
   </head>
   <body>
-    <h1>This test app does nothing but load this page.</h1>
+    <h1>${encrypted}</h1>
   </body>
 </html>
