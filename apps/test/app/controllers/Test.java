@@ -10,7 +10,7 @@ import test.app.models.Encryption;
 
 public class Test extends AbstractControllerImpl {
 
-  private static Logger logger = Logger.getLogger("Test");
+  private static Logger logger = Logger.getLogger(Test.class);
 
   public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
       Encryption enc = new Encryption();

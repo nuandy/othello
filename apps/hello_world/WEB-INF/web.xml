@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<!DOCTYPE web-app PUBLIC
-  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-  "http://java.sun.com/dtd/web-app_2_3.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
 
 <web-app
    xmlns="http://java.sun.com/xml/ns/javaee"
@@ -17,6 +13,19 @@
   <session-config>
     <session-timeout>20</session-timeout>
   </session-config>
+
+  <servlet>
+    <servlet-name>default</servlet-name>
+    <servlet-class>org.mortbay.jetty.servlet.DefaultServlet</servlet-class>
+    <init-param>
+      <param-name>dirAllowed</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>welcomeServlets</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </servlet>
 
   <!-- The Usual Welcome File List -->
   <welcome-file-list>
@@ -33,6 +42,16 @@
     <url-pattern>/upload</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+    <servlet-name>BaseServlet</servlet-name>
+    <url-pattern>/upload.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
   <context-param>
     <description>Unique App Key</description>
     <param-name>app.key</param-name>
@@ -41,12 +60,12 @@
 
   <error-page>
     <error-code>404</error-code>
-    <location>/app/views/http_status/404.html</location>
+    <location>app/views/http_status/404.html</location>
   </error-page>
 
   <error-page>
     <error-code>500</error-code>
-    <location>/app/views/http_status/500.html</location>
+    <location>app/views/http_status/500.html</location>
   </error-page>
 
 </web-app>

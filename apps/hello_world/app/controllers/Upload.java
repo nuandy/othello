@@ -9,7 +9,7 @@ import src.main.othello.web.controller.impl.AbstractControllerImpl;
 
 public class Upload extends AbstractControllerImpl {
 
-  private static Logger logger = Logger.getLogger("Upload");
+  private static Logger logger = Logger.getLogger(Upload.class);
 
   public static void initUpload(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
       UploadFiles upf = new UploadFiles();

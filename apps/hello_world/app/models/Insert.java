@@ -7,7 +7,7 @@ import org.apache.log4j.*;
 
 public class Insert extends Jdbc {
 
-    private static Logger logger = Logger.getLogger("Insert");
+    private static Logger logger = Logger.getLogger(Insert.class);
 
     Connection       db;
     Statement        sql;

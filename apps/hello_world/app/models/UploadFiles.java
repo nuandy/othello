@@ -14,13 +14,13 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class UploadFiles {
 
-    private static Logger logger = Logger.getLogger("UploadFiles");
+    private static Logger logger = Logger.getLogger(UploadFiles.class);
 
     public static void upload(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
         if (!isMultipart) {
-        
+
         } else {
             DiskFileItemFactory fileItemFactory = new DiskFileItemFactory ();
             fileItemFactory.setSizeThreshold(1*1024*1024); //1 MB
