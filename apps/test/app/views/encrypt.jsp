@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Test App</title>
+    <title>Encrypted String</title>
   </head>
   <body>
     <h1>${encrypted}</h1>

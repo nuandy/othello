@@ -34,12 +34,22 @@
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/test</url-pattern>
+    <url-pattern>/encrypt</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/test.jsp</url-pattern>
+    <url-pattern>/encrypt.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BaseServlet</servlet-name>
+    <url-pattern>/books</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BaseServlet</servlet-name>
+    <url-pattern>/books.jsp</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
@@ -54,7 +64,7 @@
   </context-param>
 
   <welcome-file-list>
-    <welcome-file>test.jsp</welcome-file>
+    <welcome-file>encrypt.jsp</welcome-file>
   </welcome-file-list>
 
   <error-page>
