@@ -1,5 +1,7 @@
 Othello is a MVC Java web framework.
 
+Requirements: Java 6 (Othello incorporates Java 6 features)
+
 Assuming Othello is installed under /web/othello.
 
 To build all apps in the /web/othello/apps directory:
