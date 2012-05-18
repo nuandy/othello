@@ -7,15 +7,13 @@ public class Encryption {
 
     private static Logger logger = Logger.getLogger(Encryption.class);
 
-    public static String encrypt() {
+    public static String encrypt(String password) {
 
-        String text = "The quick brown fox jumps over the lazy dog";
         BasicTextEncryptor bte = new BasicTextEncryptor();
-        bte.setPassword("HelloWorld");
-        String encrypted = bte.encrypt(text);
+        bte.setPassword("knicks");
+        String encrypted = bte.encrypt(password);
         String original = bte.decrypt(encrypted);
         return encrypted;
 
     }
 }
-

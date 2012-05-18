@@ -15,7 +15,6 @@ public class Books extends AbstractControllerImpl {
   public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
       JerseyClientGet client = new JerseyClientGet();
       client.get();
-      //request.setAttribute("encrypted", encrypted);
       super.forward("app/views/books.jsp", request, response);
   }
 

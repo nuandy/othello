@@ -53,6 +53,16 @@
   </servlet-mapping>
 
   <servlet-mapping>
+    <servlet-name>BaseServlet</servlet-name>
+    <url-pattern>/toy</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BaseServlet</servlet-name>
+    <url-pattern>/toy.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
