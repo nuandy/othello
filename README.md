@@ -1,4 +1,4 @@
-Othello is a MVC Java web framework.
+Othello is a Java MVC web framework.
 
 Requirements: Java 6 (Othello incorporates Java 6 features)
 
