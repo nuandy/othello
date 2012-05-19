@@ -2,11 +2,11 @@ import os
 import sys
 import getopt
 
-"""othello.py by Andy Nu nuandy@gmail.com
+"""othello-build.py by Andy Nu nuandy@gmail.com
 This script accepts two options.
-1) To build a specific app in the apps directory, try: python othello.py --app=foo
+1) To build a specific app in the apps directory, try: python othello-build.py --app=foo
    where foo is the directory name of your app.
-2) To build all the apps in the apps directory, try: python othello.py --buildall
+2) To build all the apps in the apps directory, try: python othello-build.py --buildall
 """
 
 xml_version = '1.0'
@@ -221,6 +221,6 @@ for opt, arg in options:
 
 if app_arg == '' and buildall == False:
   print 'This script accepts two options.\n'
-  print '1) To build a specific app in the apps directory, try: python othello.py --app=foo\n'
+  print '1) To build a specific app in the apps directory, try: python othello-build.py --app=foo\n'
   print 'where foo is the directory name of your app.\n'
-  print '2) To build all the apps in the apps directory, try: python othello.py --buildall\n'
+  print '2) To build all the apps in the apps directory, try: python othello-build.py --buildall\n'
