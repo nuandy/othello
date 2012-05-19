@@ -6,3 +6,4 @@ server/logs
 lib/othello
 *.iml
 */**hello_world.jar
+app.log
