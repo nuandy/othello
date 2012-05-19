@@ -14,7 +14,7 @@ public class Encrypt extends AbstractControllerImpl {
 
   public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
       Encryption enc = new Encryption();
-      String password = "l1nSan1ty";
+      String password = "P@ssW0rd";
       String encrypted = enc.encrypt(password);
       request.setAttribute("encrypted", encrypted);
       super.forward("app/views/encrypt.jsp", request, response);

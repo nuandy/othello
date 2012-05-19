@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<!-- Place this file in /Library/LaunchDaemons on MAC OS X -->
+<!-- Run this command to load/start Othello's Jetty Server as a daemon: launchctl load /Library/LaunchDaemons/othello.plist -->
+<!-- Run this command to unload/stop Othello's Jetty Server as a daemon: launchctl unload /Library/LaunchDaemons/othello.plist -->
+
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>othello</string>
+        <key>ServiceDescription</key>
+        <string>Starts Jetty Server for Othello</string>
+        <key>RunAtLoad</key>
+        <true/>
+        <key>EnvironmentVariables</key>
+        <dict>
+            <key>JAVA_HOME</key>
+            <string>/Library/Java/Home</string>
+        </dict>
+        <key>WorkingDirectory</key>
+        <string>/web/othello</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/web/othello/bin/othello.sh</string>
+        </array>
+        <key>UserName</key>
+        <string>root</string>
+    </dict>
+</plist>

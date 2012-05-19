@@ -18,10 +18,20 @@ options, extraparams = getopt.getopt(sys.argv[1:], '', ['app=',
                                                         'buildall',
                                                         ])
 
+path = os.path.realpath('.')
+base = os.path.basename(path)
+
 def listapps():
-  os.chdir(sys.path[0]+'/apps')
-  apps = [name for name in os.listdir('.') if os.path.isdir(name)]
-  os.chdir(sys.path[0])
+  if base == 'othello':
+    os.chdir(os.path.abspath(os.curdir)+'/apps')
+    apps = [name for name in os.listdir('.') if os.path.isdir(name)]
+    os.chdir(os.path.pardir)
+  elif base == 'bin':
+    os.chdir(os.path.pardir+'/apps')
+    apps = [name for name in os.listdir('.') if os.path.isdir(name)]
+    os.chdir(os.path.pardir)
+  else:
+    sys.exit("Oops! This script must be run within the root/top level othello directory or othello/bin!")
   return apps
 
 apps_collection = listapps()
@@ -30,12 +40,13 @@ apps_collection = listapps()
 for opt, arg in options:
   if opt in ('--app'):
     app_arg = arg
+    app_exists = 'false'
     for name in apps_collection:
       if app_arg == name:
-         app_exists = 'true'
-         break
+        app_exists = 'true'
+        break
       else:
-         app_exists = 'false'
+        app_exists = 'false'
     if app_exists == 'true':
       xmlstring =  '<?xml version="' + xml_version + '" encoding="' + encoding  + '" ?>\n'
       xmlstring += '<project name="othello" basedir="." default="main">\n'
