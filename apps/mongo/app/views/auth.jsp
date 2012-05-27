@@ -5,6 +5,7 @@
     <title>Mongo App</title>
   </head>
   <body>
-    <h1>${collectionNames}</h1>
+    <h1>Results of your query:</h1>	
+    <p>${results}</p>
   </body>
 </html>

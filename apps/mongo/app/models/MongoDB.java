@@ -3,9 +3,10 @@ package mongo.app.models;
 import java.net.UnknownHostException;
 import java.util.Set;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-
+													
 import com.mongodb.Mongo;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -20,46 +21,63 @@ public class MongoDB {
 
     private static Logger logger = Logger.getLogger(MongoDB.class);
 
-    public DB connect() throws UnknownHostException {
-        Mongo m = new Mongo();
-        DB db = m.getDB("mydb");
-        return db;
+    private static DB db = null;
+    private static DBCollection collection = null;
+
+    public static void connect() throws UnknownHostException {
+        Mongo m = new Mongo("localhost", 27017);
+        db = m.getDB("mydb");
     }
 
-    public static String getCollectionNames(DB db) {
-        String collections = "";
-        Set<String> colls = db.getCollectionNames();
-
-        for (String s : colls) {
-            collections += s + ",";
-        }
-
-        return collections;
+    public static void getCollection(String name) {
+        collection = db.getCollection(name);
     }
 
-    public static DBCollection getCollection(String name, DB db) {
-        DBCollection collection = db.getCollection(name);
-        return collection;
-    }
-
-    public static void createIndex(List<String> names, DBCollection collection) {
+    public static void setIndex(List<String> names) {
         for (String name : names) {
             collection.ensureIndex(new BasicDBObject(name, 1));
         }
     }
 
-    public static void createDocument(List<Map<String, String>> data, DBCollection collection) {
+    public static void setDocument(Map<String, ?> data) {
         BasicDBObject dbObj = new BasicDBObject();
 
-        for (Map<String, String> d : data) {
-            for (Map.Entry<String, String> entry : d.entrySet()) {
-                dbObj.put(entry.getKey(), entry.getValue());
-            }
+        for (Map.Entry<String, ?> entry : data.entrySet()) {
+            dbObj.put(entry.getKey(), entry.getValue());
         }
 
         dbObj.put("created_at", (int) (System.currentTimeMillis()/1000));
         collection.insert(dbObj);
     }
 
+    public static List<Object> getDocuments(Map<String, ?> data) {
+
+	List<Object> results = new ArrayList();
+
+	BasicDBObject query = new BasicDBObject();
+
+        for (Map.Entry<String, ?> entry : data.entrySet()) {                                                                         
+            query.put(entry.getKey(), entry.getValue());                                                                                  
+        }
+
+        DBCursor cursor = collection.find(query);
+
+        while(cursor.hasNext()) {
+            results.add(cursor.next());
+        }
+
+	return results;
+    } 
+
+    public static List<String> getCollectionNames(DB db) {
+        List<String> collections = new ArrayList();
+        Set<String> colls = db.getCollectionNames();
+
+        for (String s : colls) {
+            collections.add(s);
+        }
+
+        return collections;
+    }   
 
 }
