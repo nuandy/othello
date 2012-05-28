@@ -64,7 +64,7 @@
   </context-param>
 
   <welcome-file-list>
-    <welcome-file>app/views/login.jsp</welcome-file>
+    <welcome-file>app/views/index.jsp</welcome-file>
   </welcome-file-list>
 
   <error-page>

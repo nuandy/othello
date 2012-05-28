@@ -3,16 +3,9 @@
 
 <jsp:include page="includes/header.jsp" />
 
-<c:choose>
-  <c:when test="${fn:length(cookie.eleveny_user.value) > 0}">
-    <h1>My App</h1>
-    <p>User Name: ${cookie.eleveny_user_name.value}</p>
-    <p>User Email: ${cookie.eleveny_user_email.value}</p>
-    <p>User ID: ${cookie.eleveny_user.value}</p>
-  </c:when>
-  <c:otherwise>
-    <c:redirect url="/login" />
-  </c:otherwise>
-</c:choose>
+  <h1>My App</h1>
+  <p>You are viewing this page because you have signed in successfully!</p>
+  <p>Auth Token: ${cookie.myapptoken.value}</p>
+  <p><a href="auth?route=logout">Sign Out</a></p>
 
 <jsp:include page="includes/footer.jsp" />

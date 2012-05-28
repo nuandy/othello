@@ -7,6 +7,7 @@ public class User {
     String email;
     String password;
     String fullname;
+    String auth_token;
     int created_at;
 
     public String getId() {
@@ -23,6 +24,14 @@ public class User {
 
     public int getStatus() {
         return status;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getAuthToken() {
+        return auth_token;
     }
 
     public int getCreatedAt() {

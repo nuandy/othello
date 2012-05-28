@@ -50,6 +50,16 @@ public class MongoDB {
         collection.insert(dbObj);
     }
 
+    public static void updateDocumentByEmail(String email, Map<String, ?> data) {
+        BasicDBObject dbObj = new BasicDBObject();
+
+        for (Map.Entry<String, ?> entry : data.entrySet()) {
+            dbObj.put(entry.getKey(), entry.getValue());
+        }
+
+        collection.update(new BasicDBObject().append("email", email), dbObj);
+    }
+
     public static List<Object> getDocuments(Map<String, ?> data) {
 
 	      List<Object> results = new ArrayList();
