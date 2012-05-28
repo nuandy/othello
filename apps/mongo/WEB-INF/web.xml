@@ -39,7 +39,17 @@
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/auth.jsp</url-pattern>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BaseServlet</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BaseServlet</servlet-name>
+    <url-pattern>/success</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
@@ -54,7 +64,7 @@
   </context-param>
 
   <welcome-file-list>
-    <welcome-file>auth.jsp</welcome-file>
+    <welcome-file>app/views/login.jsp</welcome-file>
   </welcome-file-list>
 
   <error-page>

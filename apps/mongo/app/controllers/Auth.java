@@ -9,48 +9,120 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.*;
+
+import com.google.gson.Gson;
+
 import src.main.othello.web.controller.impl.AbstractControllerImpl;
 import mongo.app.models.Encryption;
 import mongo.app.models.MongoDB;
+
+import com.mongodb.util.JSON;
+
+import mongo.app.models.User;
+import mongo.app.models.UserOid;
 
 public class Auth extends AbstractControllerImpl {
 
   private static Logger logger = Logger.getLogger(Auth.class);
 
-  public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {	
+  public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-      List<Object> results = new ArrayList();
+      if (request.getParameter("route").equals("login")) {
+          this.login(request, response);
+      } else if (request.getParameter("route").equals("register")) {
+          this.register(request, response);
+      }
+
+  }
+
+  public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+      String email = request.getParameter("email");
+      String password = request.getParameter("password");
+
+      if (StringUtils.isNotBlank(email)) {
+          List<Object> results = new ArrayList();
+
+          MongoDB mongo = new MongoDB();
+          mongo.connect();
+          mongo.getCollection("user");
+
+          Map query = new HashMap();
+          query.put("email", email);
+
+          results = mongo.getDocuments(query);
+
+          if (!results.isEmpty()) {
+
+              String result = JSON.serialize(results.get(0));
+
+              Gson gson = new Gson();
+
+              User user = gson.fromJson(result, User.class);
+
+              if (StringUtils.isNotBlank(user.getId())) {
+                  Cookie userCookie = new Cookie("eleveny_user", user.getId());
+                  response.addCookie(userCookie);
+                  this.success(user, request, response);
+              }
+
+          } else {
+              request.setAttribute("failed", true);
+              super.forward("app/views/login.jsp", request, response);
+          }
+
+      } else {
+          request.setAttribute("failed", true);
+          super.forward("app/views/login.jsp", request, response);
+      }
+
+  }
+
+  public void register(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+      String email = request.getParameter("email");
+      String fullname = request.getParameter("fullname");
+      String password = request.getParameter("password");
 
       List<String> indexNames = new ArrayList();
       indexNames.add("email");
       indexNames.add("fullname");
-      
-      Map document = new HashMap();
-      document.put("email", "nuandy@gmail.com");
-      document.put("fullname", "Andy Nu");
-      document.put("status", 1);
 
-      Map query = new HashMap();
-      query.put("status", 1);
+      Map document = new HashMap();
+      document.put("email", email);
+      document.put("fullname", fullname);
+      document.put("status", 1);
+      document.put("password", password);
 
       MongoDB mongo = new MongoDB();
       mongo.connect();
-      mongo.getCollection("dude");
+      mongo.getCollection("user");
       mongo.setIndex(indexNames);
       mongo.setDocument(document);
-      results = mongo.getDocuments(query);
 
-      request.setAttribute("results", results);
-      super.forward("app/views/auth.jsp", request, response);
+      request.setAttribute("registered", true);
+      super.forward("app/views/login.jsp", request, response);
   }
 
-  public static void login() {
-
+  public void success(User user, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+      String cookieValue = this.getCookieValue(request.getCookies(), "eleveny_user", "invalid");
+      request.setAttribute("cookieValue", cookieValue);
+      request.setAttribute("fullname", user.getName());
+      request.setAttribute("email", user.getEmail());
+      request.setAttribute("status", user.getStatus());
+      request.setAttribute("created_at", user.getCreatedAt());
+      super.forward("app/views/success.jsp", request, response);
   }
 
-  public static void register() {
-
+  public static String getCookieValue(Cookie[] cookies, String cookieName, String defaultValue) {
+      for(Cookie cookie : cookies) {
+          if (cookieName.equals(cookie.getName())) {
+              return(cookie.getValue());
+          }
+      }
+      return(defaultValue);
   }
 
   public static String encrypt() {

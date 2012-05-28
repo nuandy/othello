@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-													
+
 import com.mongodb.Mongo;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -25,7 +25,7 @@ public class MongoDB {
     private static DBCollection collection = null;
 
     public static void connect() throws UnknownHostException {
-        Mongo m = new Mongo("localhost", 27017);
+        Mongo m = new Mongo();
         db = m.getDB("mydb");
     }
 
@@ -52,12 +52,12 @@ public class MongoDB {
 
     public static List<Object> getDocuments(Map<String, ?> data) {
 
-	List<Object> results = new ArrayList();
+	      List<Object> results = new ArrayList();
 
-	BasicDBObject query = new BasicDBObject();
+	      BasicDBObject query = new BasicDBObject();
 
-        for (Map.Entry<String, ?> entry : data.entrySet()) {                                                                         
-            query.put(entry.getKey(), entry.getValue());                                                                                  
+        for (Map.Entry<String, ?> entry : data.entrySet()) {
+            query.put(entry.getKey(), entry.getValue());
         }
 
         DBCursor cursor = collection.find(query);
@@ -66,8 +66,8 @@ public class MongoDB {
             results.add(cursor.next());
         }
 
-	return results;
-    } 
+	      return results;
+    }
 
     public static List<String> getCollectionNames(DB db) {
         List<String> collections = new ArrayList();
@@ -78,6 +78,6 @@ public class MongoDB {
         }
 
         return collections;
-    }   
+    }
 
 }
