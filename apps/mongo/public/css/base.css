@@ -1,0 +1,42 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: helvetica;
+  font-size: 18px;
+}
+
+h1 {
+  font-size: 34px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  font-size: 36px;
+}
+
+div.login, div.register {
+  border: 1px solid #424242;
+  margin: 20px;
+  padding: 0 10px 15px 10px;
+}
+
+div.login h1, div.register h1 {
+  background-color: #424242;
+  color: #FFFFFF;
+  margin: 0 -10px 10px -10px;
+  padding: 10px 10px 10px 10px;
+}

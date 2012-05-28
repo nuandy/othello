@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.AddressException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.*;
 
@@ -86,24 +89,44 @@ public class Auth extends AbstractControllerImpl {
       String fullname = request.getParameter("fullname");
       String password = request.getParameter("password");
 
-      List<String> indexNames = new ArrayList();
-      indexNames.add("email");
-      indexNames.add("fullname");
+      if (StringUtils.isNotBlank(email) && StringUtils.isNotBlank(fullname) && StringUtils.isNotBlank(password)) {
 
-      Map document = new HashMap();
-      document.put("email", email);
-      document.put("fullname", fullname);
-      document.put("status", 1);
-      document.put("password", password);
+          if (validateEmail(email) == true && password.length() > 7) {
 
-      MongoDB mongo = new MongoDB();
-      mongo.connect();
-      mongo.getCollection("user");
-      mongo.setIndex(indexNames);
-      mongo.setDocument(document);
+              List<String> indexNames = new ArrayList();
+              indexNames.add("email");
+              indexNames.add("fullname");
 
-      request.setAttribute("registered", true);
-      super.forward("app/views/login.jsp", request, response);
+              Map document = new HashMap();
+              document.put("email", email);
+              document.put("fullname", fullname);
+              document.put("status", 1);
+              document.put("password", password);
+
+              MongoDB mongo = new MongoDB();
+              mongo.connect();
+              mongo.getCollection("user");
+              mongo.setIndex(indexNames);
+              mongo.setDocument(document);
+
+              request.setAttribute("registered", true);
+              super.forward("app/views/login.jsp", request, response);
+
+          } else if (validateEmail(email) == false) {
+              request.setAttribute("bad_email", true);
+              super.forward("app/views/register.jsp", request, response);
+          } else if (password.length() < 8) {
+              request.setAttribute("bad_password", true);
+              super.forward("app/views/register.jsp", request, response);
+          } else {
+              request.setAttribute("failed", true);
+              super.forward("app/views/register.jsp", request, response);
+          }
+
+      } else {
+          request.setAttribute("failed", true);
+          super.forward("app/views/register.jsp", request, response);
+      }
   }
 
   public void success(User user, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -123,6 +146,18 @@ public class Auth extends AbstractControllerImpl {
           }
       }
       return(defaultValue);
+  }
+
+  public static boolean validateEmail(String email) {
+
+      try {
+          new InternetAddress(email).validate();
+      } catch (AddressException e) {
+          logger.error(e.getMessage());
+          return false;
+      }
+      return true;
+
   }
 
   public static String encrypt() {
