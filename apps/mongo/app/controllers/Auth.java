@@ -66,8 +66,6 @@ public class Auth extends AbstractControllerImpl {
               User user = gson.fromJson(result, User.class);
 
               if (StringUtils.isNotBlank(user.getId())) {
-                  Cookie userCookie = new Cookie("eleveny_user", user.getId());
-                  response.addCookie(userCookie);
                   this.success(user, request, response);
               }
 
@@ -130,13 +128,24 @@ public class Auth extends AbstractControllerImpl {
   }
 
   public void success(User user, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-      String cookieValue = this.getCookieValue(request.getCookies(), "eleveny_user", "invalid");
-      request.setAttribute("cookieValue", cookieValue);
-      request.setAttribute("fullname", user.getName());
-      request.setAttribute("email", user.getEmail());
-      request.setAttribute("status", user.getStatus());
-      request.setAttribute("created_at", user.getCreatedAt());
-      super.forward("app/views/success.jsp", request, response);
+
+      Cookie userCookie = new Cookie("eleveny_user", user.getId());
+      response.addCookie(userCookie);
+
+      Cookie userNameCookie = new Cookie("eleveny_user_name", user.getName());
+      response.addCookie(userNameCookie);
+
+      Cookie userEmailCookie = new Cookie("eleveny_user_email", user.getEmail());
+      response.addCookie(userEmailCookie);
+
+      String cookieValue = this.getCookieValue(request.getCookies(), "eleveny_user", user.getId());
+
+      if (cookieValue.equals(user.getId())) {
+          super.forward("app/views/success.jsp", request, response);
+      } else {
+          request.setAttribute("failed", true);
+          super.forward("app/views/login.jsp", request, response);
+      }
   }
 
   public static String getCookieValue(Cookie[] cookies, String cookieName, String defaultValue) {
@@ -145,7 +154,7 @@ public class Auth extends AbstractControllerImpl {
               return(cookie.getValue());
           }
       }
-      return(defaultValue);
+      return defaultValue;
   }
 
   public static boolean validateEmail(String email) {

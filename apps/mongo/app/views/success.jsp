@@ -1,21 +1,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="includes/header.jsp" />
 
-<c:set var="authorized" value="${cookieValue}" />
-
 <c:choose>
-  <c:when test="${authorized}">
-    <h1>Results of your query:</h1>
-    <p>Name: ${fullname}</p>
-    <p>Email: ${email}</p>
-    <p>Status: ${status}</p>
-    <p>Created At: ${created_at}</p>
-    <h1>Cookie Value</h1>
-    <p>${cookieValue}</p>
+  <c:when test="${fn:length(cookie.eleveny_user.value) > 0}">
+    <h1>My App</h1>
+    <p>User Name: ${cookie.eleveny_user_name.value}</p>
+    <p>User Email: ${cookie.eleveny_user_email.value}</p>
+    <p>User ID: ${cookie.eleveny_user.value}</p>
   </c:when>
   <c:otherwise>
-    <h1>Oops! You must <a href="login">sign in</a> to view this page.</h1>
+    <c:redirect url="/login" />
   </c:otherwise>
 </c:choose>
 
