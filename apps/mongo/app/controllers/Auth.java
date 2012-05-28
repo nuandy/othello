@@ -36,6 +36,8 @@ public class Auth extends AbstractControllerImpl {
           this.login(request, response);
       } else if (request.getParameter("route").equals("register")) {
           this.register(request, response);
+      } else if (request.getParameter("route").equals("logout")) {
+          this.logout(request, response);
       }
 
   }
@@ -54,6 +56,7 @@ public class Auth extends AbstractControllerImpl {
 
           Map query = new HashMap();
           query.put("email", email);
+          query.put("password", password);
 
           results = mongo.getDocuments(query);
 
@@ -146,6 +149,20 @@ public class Auth extends AbstractControllerImpl {
           request.setAttribute("failed", true);
           super.forward("app/views/login.jsp", request, response);
       }
+  }
+
+  public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+      Cookie userCookie = new Cookie("eleveny_user", "");
+      userCookie.setMaxAge(0);
+      response.addCookie(userCookie);
+      Cookie userNameCookie = new Cookie("eleveny_user_name", "");
+      userNameCookie.setMaxAge(0);
+      response.addCookie(userNameCookie);
+      Cookie userEmailCookie = new Cookie("eleveny_user_email", "");
+      userEmailCookie.setMaxAge(0);
+      response.addCookie(userEmailCookie);
+      request.setAttribute("signedout", true);
+      super.forward("app/views/login.jsp", request, response);
   }
 
   public static String getCookieValue(Cookie[] cookies, String cookieName, String defaultValue) {

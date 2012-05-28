@@ -5,6 +5,7 @@
 
 <c:set var="just_registered" value="${registered}" />
 <c:set var="signin_failed" value="${failed}" />
+<c:set var="signed_out" value="${signedout}" />
 
 <c:choose>
   <c:when test="${fn:length(cookie.eleveny_user.value) > 0}">
@@ -20,6 +21,9 @@
       <c:when test="${signin_failed}">
         <h1>Oops! We could not sign you in.</h1>
         <h1>Please check your credentials and try again.</h1>
+      </c:when>
+      <c:when test="${signed_out}">
+        <h1>You have signed out. Hope to see you back soon.</h1>
       </c:when>
       <c:otherwise>
         <h1>Welcome to My App!</h1>
