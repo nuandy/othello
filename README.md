@@ -13,7 +13,7 @@ Some features of Othello:
 * Python script to build all or specified applications.
 * Python script that starts the server.
 
-Othello comes with 3 sample apps. I recommend you check them out to a get a feel about how Othello works. They can be found under: /othello/apps
+Othello comes with 3 sample apps. I recommend you check them out to get a feel of how Othello works. They can be found under: /othello/apps
 
 Check out the <a href="https://github.com/nuandy/othello/wiki">wiki</a> for help!
 
