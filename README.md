@@ -15,4 +15,6 @@ Some features of Othello:
 
 Othello comes with 3 sample apps. I recommend you check them out to a get a feel about how Othello works. They can be found under: /othello/apps
 
+Check out the <a href="https://github.com/nuandy/othello/wiki">wiki</a> for help!
+
 Please feel free to contact me with any questions about Othello: <a href="mailto:nuandy@gmail.com">nuandy@gmail.com</a>
