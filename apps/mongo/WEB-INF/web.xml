@@ -34,22 +34,22 @@
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/auth</url-pattern>
+    <url-pattern>/auth.jsp</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
+    <url-pattern>/login.jsp</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/register</url-pattern>
+    <url-pattern>/register.jsp</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/success</url-pattern>
+    <url-pattern>/success.jsp</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

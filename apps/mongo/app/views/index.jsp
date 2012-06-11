@@ -4,8 +4,8 @@
 
 <h1>Welcome to our Website!</h1>
 
-<p><a href="success">Try our App</a></p>
+<p><a href="success.jsp">Try our App</a></p>
 
-<p><a href="register">Register</a></p>
+<p><a href="register.jsp">Register</a></p>
 
 <jsp:include page="includes/footer.jsp" />

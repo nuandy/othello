@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <url controller="hello_world.app.controllers.Upload">/upload.jsp</url>
+</routes>

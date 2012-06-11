@@ -1,11 +1,19 @@
 package src.main.servlet;
 
+import java.util.regex.*;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.lang.reflect.Method;
 import org.apache.log4j.*;
+
+import java.io.File;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 
 public class BaseServlet extends HttpServlet {
 
@@ -35,27 +43,32 @@ public class BaseServlet extends HttpServlet {
         }
     }
 
-    private static String capitalizeFirstLetters(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            if (i == 0) {
-                s = String.format("%s%s", Character.toUpperCase(s.charAt(0)), s.substring(1));
-            }
-            if (!Character.isLetterOrDigit(s.charAt(i))) {
-                if (i + 1 < s.length()) {
-                    s = String.format("%s%s%s", s.subSequence(0, i+1), Character.toUpperCase(s.charAt(i + 1)), s.substring(i+2));
+    private String getClassName(String pattern) {
+
+        String controller = "";
+        String appKey = getServletContext().getInitParameter("app.key");
+
+        try {
+
+            File file = new File("apps/"+appKey+"/conf/routes.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(Routes.class);
+
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            Routes routes = (Routes) jaxbUnmarshaller.unmarshal(file);
+
+            for (RouteURL u : routes.urls) {
+                if (pattern.equals(u.url)) {
+                    controller = u.controller;
                 }
             }
+
+            return controller;
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
         }
-        return s;
-    }
 
-    private String getClassName(String pattern) {
-        String appKey = getServletContext().getInitParameter("app.key");
-        String servletName = pattern.replace("/","");
-        servletName = servletName.replace(".jsp","");
-        String servletNameCaps = capitalizeFirstLetters(servletName);
-        String controllerName = servletNameCaps.replace("_","").replace(".","").replace("-","");
-        return appKey+".app.controllers."+controllerName;
-    }
+        return controller;
 
+    }
 }

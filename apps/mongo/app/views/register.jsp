@@ -28,14 +28,14 @@
 
   <h1>Register</h1>
 
-  <form action="auth?route=register" method="post">
+  <form action="auth.jsp?route=register" method="post">
     <input type="text" name="fullname" placeholder="Full Name" />
     <input type="text" name="email" placeholder="Email" />
     <input type="password" name="password" placeholder="Password" />
     <input type="submit" name="register" value="Register" />
   </form>
 
-  <p>Already a member? <a href="login">Sign in now</a></p>
+  <p>Already a member? <a href="login.jsp">Sign in now</a></p>
 
 </div>
 

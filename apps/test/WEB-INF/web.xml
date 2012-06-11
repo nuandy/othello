@@ -34,27 +34,12 @@
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/encrypt</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>BaseServlet</servlet-name>
     <url-pattern>/encrypt.jsp</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/books</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>BaseServlet</servlet-name>
     <url-pattern>/books.jsp</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/toy</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

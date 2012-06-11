@@ -28,13 +28,13 @@
 
   <h1>Sign in</h1>
 
-  <form action="auth?route=login" method="post">
+  <form action="auth.jsp?route=login" method="post">
     <input type="text" name="email" placeholder="Email" />
     <input type="password" name="password" placeholder="Password" />
     <input type="submit" name="login" value="Log in" />
   </form>
 
-  <p>Not a member? <a href="register">Register now</a></p>
+  <p>Not a member? <a href="register.jsp">Register now</a></p>
 
 </div>
 

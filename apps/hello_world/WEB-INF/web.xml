@@ -39,11 +39,6 @@
 
   <servlet-mapping>
     <servlet-name>BaseServlet</servlet-name>
-    <url-pattern>/upload</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>BaseServlet</servlet-name>
     <url-pattern>/upload.jsp</url-pattern>
   </servlet-mapping>
 

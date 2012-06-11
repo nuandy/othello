@@ -5,7 +5,7 @@
     <title>File Uploader</title>
   </head>
   <body>
-    <form action="upload" method="post" enctype="multipart/form-data" name="upload_form">
+    <form action="upload.jsp" method="post" enctype="multipart/form-data" name="upload_form">
       <p>Choose file: <input name="file1" type="file"></p>
       <p>Choose file: <input name="file2" type="file"></p>
       <p>Choose file: <input name="file3" type="file"></p>

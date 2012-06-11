@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
     <ul>
-      <li><a href="success">App Home</a></li>
+      <li><a href="success.jsp">App Home</a></li>
       <li>|</li>
       <li><a href="#">About Us</a></li>
       <li>|</li>

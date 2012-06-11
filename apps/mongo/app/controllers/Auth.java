@@ -101,7 +101,7 @@ public class Auth extends AbstractControllerImpl {
 
               if (StringUtils.isNotBlank(user.getId())) {
                   this.setUserCookie(user, request, response);
-                  response.sendRedirect("success");
+                  response.sendRedirect("success.jsp");
               }
 
           } else {
