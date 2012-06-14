@@ -10,8 +10,9 @@ Some features of Othello:
 * Includes Jersey web services client.
 * Includes Google's GSON library to convert JSON to Java objects and vice-versa.
 * Specify application URLs and corresponding controllers easily via the routes.xml file.
-* Python script to build all or specified applications.
-* Python script that starts the server.
+* Python script that creates a skeletal web application.
+* Python script to build a web application.
+* Python script that starts the web server.
 
 Othello comes with 3 sample apps. I recommend you check them out to get a feel of how Othello works. They can be found under: /othello/apps
 
