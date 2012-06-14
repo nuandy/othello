@@ -37,94 +37,110 @@ def servletmapping():
     for opt, arg in options:
       if opt in ('--app'):
         app_arg = arg
-        os.chdir(os.path.abspath(os.curdir)+'/apps/'+app_arg)
-        os.chdir('WEB-INF')
-        xmldoc = xml.dom.minidom.parse('web.xml')
-        for node in xmldoc.getElementsByTagName('web-app'):
-          for subnode in xmldoc.getElementsByTagName('servlet-mapping'):
-            node.removeChild(subnode)
-        servletmapping = xmldoc.createElement('servlet-mapping')
-        servletname = xmldoc.createElement('servlet-name')
-        default = xmldoc.createTextNode('default')
-        urlpattern = xmldoc.createElement('url-pattern')
-        url = xmldoc.createTextNode('/')
-        servletname.appendChild(default)
-        urlpattern.appendChild(url)
-        servletmapping.appendChild(servletname)
-        servletmapping.appendChild(urlpattern)
-        for node in xmldoc.getElementsByTagName('web-app'):
-          node.appendChild(servletmapping)
-        os.chdir(os.path.pardir)
-        os.chdir('conf')
-        xmldocroutes = xml.dom.minidom.parse('routes.xml')
-        for route in xmldocroutes.getElementsByTagName('routes'):
-          for routeurl in xmldocroutes.getElementsByTagName('url'):
-            print 'Associating '+ routeurl.firstChild.nodeValue + ' found in routes.xml with WEB-INF/web.xml'
-            servletmapping = xmldoc.createElement('servlet-mapping')
-            servletname = xmldoc.createElement('servlet-name')
-            baseservlet = xmldoc.createTextNode('BaseServlet')
-            urlpattern = xmldoc.createElement('url-pattern')
-            url = xmldoc.createTextNode(routeurl.firstChild.nodeValue)
-            servletname.appendChild(baseservlet)
-            urlpattern.appendChild(url)
-            servletmapping.appendChild(servletname)
-            servletmapping.appendChild(urlpattern)
-            for node in xmldoc.getElementsByTagName('web-app'):
-              node.appendChild(servletmapping)
-        os.chdir(os.path.pardir)
-        os.chdir('WEB-INF')
-        f = open('web.xml', 'w')
-        f.write(xmldoc.toxml())
-        f.close()
-        os.chdir(os.path.pardir)
-        os.chdir(os.path.pardir)
-        os.chdir(os.path.pardir)
+        app_exists = 'false'
+        for name in apps_collection:
+          if app_arg == name:
+            app_exists = 'true'
+            break
+          else:
+            app_exists = 'false'
+        if app_exists == 'true':
+          os.chdir(os.path.abspath(os.curdir)+'/apps/'+app_arg)
+          os.chdir('WEB-INF')
+          xmldoc = xml.dom.minidom.parse('web.xml')
+          for node in xmldoc.getElementsByTagName('web-app'):
+            for subnode in xmldoc.getElementsByTagName('servlet-mapping'):
+              node.removeChild(subnode)
+          servletmapping = xmldoc.createElement('servlet-mapping')
+          servletname = xmldoc.createElement('servlet-name')
+          default = xmldoc.createTextNode('default')
+          urlpattern = xmldoc.createElement('url-pattern')
+          url = xmldoc.createTextNode('/')
+          servletname.appendChild(default)
+          urlpattern.appendChild(url)
+          servletmapping.appendChild(servletname)
+          servletmapping.appendChild(urlpattern)
+          for node in xmldoc.getElementsByTagName('web-app'):
+            node.appendChild(servletmapping)
+          os.chdir(os.path.pardir)
+          os.chdir('conf')
+          xmldocroutes = xml.dom.minidom.parse('routes.xml')
+          for route in xmldocroutes.getElementsByTagName('routes'):
+            for routeurl in xmldocroutes.getElementsByTagName('url'):
+              print 'Associating '+ routeurl.firstChild.nodeValue + ' found in routes.xml with WEB-INF/web.xml'
+              servletmapping = xmldoc.createElement('servlet-mapping')
+              servletname = xmldoc.createElement('servlet-name')
+              baseservlet = xmldoc.createTextNode('BaseServlet')
+              urlpattern = xmldoc.createElement('url-pattern')
+              url = xmldoc.createTextNode(routeurl.firstChild.nodeValue)
+              servletname.appendChild(baseservlet)
+              urlpattern.appendChild(url)
+              servletmapping.appendChild(servletname)
+              servletmapping.appendChild(urlpattern)
+              for node in xmldoc.getElementsByTagName('web-app'):
+                node.appendChild(servletmapping)
+          os.chdir(os.path.pardir)
+          os.chdir('WEB-INF')
+          f = open('web.xml', 'w')
+          f.write(xmldoc.toxml())
+          f.close()
+          os.chdir(os.path.pardir)
+          os.chdir(os.path.pardir)
+          os.chdir(os.path.pardir)
   elif base == 'bin':
     for opt, arg in options:
       if opt in ('--app'):
         app_arg = arg
-        os.chdir(os.path.pardir+'/apps/'+app_arg)
-        os.chdir('WEB-INF')
-        xmldoc = xml.dom.minidom.parse('web.xml')
-        for node in xmldoc.getElementsByTagName('web-app'):
-          for subnode in xmldoc.getElementsByTagName('servlet-mapping'):
-            node.removeChild(subnode)
-        servletmapping = xmldoc.createElement('servlet-mapping')
-        servletname = xmldoc.createElement('servlet-name')
-        default = xmldoc.createTextNode('default')
-        urlpattern = xmldoc.createElement('url-pattern')
-        url = xmldoc.createTextNode('/')
-        servletname.appendChild(default)
-        urlpattern.appendChild(url)
-        servletmapping.appendChild(servletname)
-        servletmapping.appendChild(urlpattern)
-        for node in xmldoc.getElementsByTagName('web-app'):
-          node.appendChild(servletmapping)
-        os.chdir(os.path.pardir)
-        os.chdir('conf')
-        xmldocroutes = xml.dom.minidom.parse('routes.xml')
-        for route in xmldocroutes.getElementsByTagName('routes'):
-          for routeurl in xmldocroutes.getElementsByTagName('url'):
-            print 'Associating '+ routeurl.firstChild.nodeValue + ' found in routes.xml with WEB-INF/web.xml'
-            servletmapping = xmldoc.createElement('servlet-mapping')
-            servletname = xmldoc.createElement('servlet-name')
-            baseservlet = xmldoc.createTextNode('BaseServlet')
-            urlpattern = xmldoc.createElement('url-pattern')
-            url = xmldoc.createTextNode(routeurl.firstChild.nodeValue)
-            servletname.appendChild(baseservlet)
-            urlpattern.appendChild(url)
-            servletmapping.appendChild(servletname)
-            servletmapping.appendChild(urlpattern)
-            for node in xmldoc.getElementsByTagName('web-app'):
-              node.appendChild(servletmapping)
-        os.chdir(os.path.pardir)
-        os.chdir('WEB-INF')
-        f = open('web.xml', 'w')
-        f.write(xmldoc.toxml())
-        f.close()
-        os.chdir(os.path.pardir)
-        os.chdir(os.path.pardir)
-        os.chdir(os.path.pardir)
+        app_exists = 'false'
+        for name in apps_collection:
+          if app_arg == name:
+            app_exists = 'true'
+            break
+          else:
+            app_exists = 'false'
+        if app_exists == 'true':
+          os.chdir(os.path.abspath(os.curdir)+'/apps/'+app_arg)
+          os.chdir('WEB-INF')
+          xmldoc = xml.dom.minidom.parse('web.xml')
+          for node in xmldoc.getElementsByTagName('web-app'):
+            for subnode in xmldoc.getElementsByTagName('servlet-mapping'):
+              node.removeChild(subnode)
+          servletmapping = xmldoc.createElement('servlet-mapping')
+          servletname = xmldoc.createElement('servlet-name')
+          default = xmldoc.createTextNode('default')
+          urlpattern = xmldoc.createElement('url-pattern')
+          url = xmldoc.createTextNode('/')
+          servletname.appendChild(default)
+          urlpattern.appendChild(url)
+          servletmapping.appendChild(servletname)
+          servletmapping.appendChild(urlpattern)
+          for node in xmldoc.getElementsByTagName('web-app'):
+            node.appendChild(servletmapping)
+          os.chdir(os.path.pardir)
+          os.chdir('conf')
+          xmldocroutes = xml.dom.minidom.parse('routes.xml')
+          for route in xmldocroutes.getElementsByTagName('routes'):
+            for routeurl in xmldocroutes.getElementsByTagName('url'):
+              print 'Associating '+ routeurl.firstChild.nodeValue + ' found in routes.xml with WEB-INF/web.xml'
+              servletmapping = xmldoc.createElement('servlet-mapping')
+              servletname = xmldoc.createElement('servlet-name')
+              baseservlet = xmldoc.createTextNode('BaseServlet')
+              urlpattern = xmldoc.createElement('url-pattern')
+              url = xmldoc.createTextNode(routeurl.firstChild.nodeValue)
+              servletname.appendChild(baseservlet)
+              urlpattern.appendChild(url)
+              servletmapping.appendChild(servletname)
+              servletmapping.appendChild(urlpattern)
+              for node in xmldoc.getElementsByTagName('web-app'):
+                node.appendChild(servletmapping)
+          os.chdir(os.path.pardir)
+          os.chdir('WEB-INF')
+          f = open('web.xml', 'w')
+          f.write(xmldoc.toxml())
+          f.close()
+          os.chdir(os.path.pardir)
+          os.chdir(os.path.pardir)
+          os.chdir(os.path.pardir)
   else:
     sys.exit("Oops! This script must be run within the root/top level othello directory or othello/bin!")
 
@@ -225,10 +241,8 @@ for opt, arg in options:
         os.system('ant')
     else:
       print 'Oops! No app by that name exists in the apps directory.'
-  else:
-    print 'Oops! I did not recognize that command. Please try again.'
 
 if app_arg == '':
   print 'This script accepts one option.\n'
-  print '1) To build a specific app in the apps directory, try: python othello-build.py --app=foo\n'
+  print 'To build a specific app in the apps directory, try: python othello-build.py --app=foo\n'
   print 'where foo is the directory name of your app.\n'
