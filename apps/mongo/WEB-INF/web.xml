@@ -1,0 +1,38 @@
+<?xml version="1.0" ?><web-app metadata-complete="true" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<display-name>mongo app</display-name>
+<session-config>
+<session-timeout>20</session-timeout>
+</session-config>
+<servlet>
+<servlet-name>default</servlet-name>
+<servlet-class>org.mortbay.jetty.servlet.DefaultServlet</servlet-class>
+<init-param>
+<param-name>dirAllowed</param-name>
+<param-value>false</param-value>
+</init-param>
+<init-param>
+<param-name>welcomeServlets</param-name>
+<param-value>true</param-value>
+</init-param>
+</servlet>
+<welcome-file-list>
+<welcome-file>index.jsp</welcome-file>
+</welcome-file-list>
+<servlet>
+<servlet-name>BaseServlet</servlet-name>
+<servlet-class>src.main.servlet.BaseServlet</servlet-class>
+</servlet>
+<context-param>
+<description>Unique App Key</description>
+<param-name>app.key</param-name>
+<param-value>mongo</param-value>
+</context-param>
+<error-page>
+<error-code>404</error-code>
+<location>/app/views/http_status/404.html</location>
+</error-page>
+<error-page>
+<error-code>500</error-code>
+<location>/app/views/http_status/500.html</location>
+</error-page>
+<servlet-mapping><servlet-name>BaseServlet</servlet-name><url-pattern>/index.jsp</url-pattern></servlet-mapping><servlet-mapping><servlet-name>BaseServlet</servlet-name><url-pattern>/auth.jsp</url-pattern></servlet-mapping><servlet-mapping><servlet-name>BaseServlet</servlet-name><url-pattern>/login.jsp</url-pattern></servlet-mapping><servlet-mapping><servlet-name>BaseServlet</servlet-name><url-pattern>/register.jsp</url-pattern></servlet-mapping><servlet-mapping><servlet-name>BaseServlet</servlet-name><url-pattern>/success.jsp</url-pattern></servlet-mapping></web-app>

@@ -12,7 +12,7 @@ public class Index extends AbstractControllerImpl {
     private static Logger logger = Logger.getLogger(Index.class);
 
     public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setAttribute("test", "dude");
+        request.setAttribute("test", "test");
         super.forward("app/views/index.jsp", request, response);
     }
 
