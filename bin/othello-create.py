@@ -76,24 +76,51 @@ def createapp():
         os.chdir(os.path.pardir)
         os.mkdir('public',0777)
         os.chdir('public')
-        htmlstring = '<html>\n'
-        htmlstring += '<head>\n'
-        htmlstring += '<title>'+ app_key +'</title>\n'
-        htmlstring += '</head>\n'
-        htmlstring += '<body>\n'
-        htmlstring += '<h1>Welcome to '+ app_key +'.</h1>\n'
-        htmlstring += '<h2>This app is powered by Othello!</h2>\n'
-        htmlstring += '</body>\n'
-        htmlstring += '</html>\n'
-        f = open('index.html', 'w')
-        f.write(htmlstring)
-        f.close()
+        os.mkdir('js',0777)
+        os.mkdir('css',0777)
         os.chdir(os.path.pardir)
         os.chdir('app')
         os.mkdir('controllers',0777)
+        os.chdir('controllers')
+        javastring = 'package '+app_key+'.app.controllers;\n'
+        javastring += 'import java.io.*;\n'
+        javastring += 'import javax.servlet.*;\n'
+        javastring += 'import javax.servlet.http.*;\n'
+        javastring += 'import java.util.Date;\n'
+        javastring += 'import java.text.DateFormat;\n'
+        javastring += 'import java.text.SimpleDateFormat;\n'
+        javastring += 'import org.apache.log4j.*;\n'
+        javastring += 'import src.main.othello.web.controller.impl.AbstractControllerImpl;\n'
+        javastring += 'public class Index extends AbstractControllerImpl {\n'
+        javastring += 'private static Logger logger = Logger.getLogger(Index.class);\n'
+        javastring += 'public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {\n'
+        javastring += 'DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");\n'
+        javastring += 'Date date = new Date();\n'
+        javastring += 'request.setAttribute("date", date);\n'
+        javastring += 'super.forward("app/views/index.jsp", request, response);\n'
+        javastring += '}\n'
+        javastring += '}\n'
+        f = open('Index.java', 'w')
+        f.write(javastring)
+        f.close()
+        os.chdir(os.path.pardir)
         os.mkdir('models',0777)
         os.mkdir('views',0777)
         os.chdir('views')
+        jspstring = '<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>\n'
+        jspstring += '<html>\n'
+        jspstring += '<head>\n'
+        jspstring += '<title>'+ app_key +'</title>\n'
+        jspstring += '</head>\n'
+        jspstring += '<body>\n'
+        jspstring += '<h1>Welcome to '+ app_key +'.</h1>\n'
+        jspstring += '<h2>This app is powered by Othello!</h2>\n'
+        jspstring += '<p>${date}</p>\n'
+        jspstring += '</body>\n'
+        jspstring += '</html>\n'
+        f = open('index.jsp', 'w')
+        f.write(jspstring)
+        f.close()
         os.mkdir('http_status',0777)
         os.chdir('http_status')
         htmlstring = '<html>\n'
@@ -189,24 +216,51 @@ def createapp():
         os.chdir(os.path.pardir)
         os.mkdir('public',0777)
         os.chdir('public')
-        htmlstring = '<html>\n'
-        htmlstring += '<head>\n'
-        htmlstring += '<title>'+ app_key +'</title>\n'
-        htmlstring += '</head>\n'
-        htmlstring += '<body>\n'
-        htmlstring += '<h1>Welcome to '+ app_key +'.</h1>\n'
-        htmlstring += '<h2>This app is powered by Othello!</h2>\n'
-        htmlstring += '</body>\n'
-        htmlstring += '</html>\n'
-        f = open('index.html', 'w')
-        f.write(htmlstring)
-        f.close()
+        os.mkdir('js',0777)
+        os.mkdir('css',0777)
         os.chdir(os.path.pardir)
         os.chdir('app')
         os.mkdir('controllers',0777)
+        os.chdir('controllers')
+        javastring = 'package '+app_key+'.app.controllers;\n'
+        javastring += 'import java.io.*;\n'
+        javastring += 'import javax.servlet.*;\n'
+        javastring += 'import javax.servlet.http.*;\n'
+        javastring += 'import java.util.Date;\n'
+        javastring += 'import java.text.DateFormat;\n'
+        javastring += 'import java.text.SimpleDateFormat;\n'
+        javastring += 'import org.apache.log4j.*;\n'
+        javastring += 'import src.main.othello.web.controller.impl.AbstractControllerImpl;\n'
+        javastring += 'public class Index extends AbstractControllerImpl {\n'
+        javastring += 'private static Logger logger = Logger.getLogger(Index.class);\n'
+        javastring += 'public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {\n'
+        javastring += 'DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");\n'
+        javastring += 'Date date = new Date();\n'
+        javastring += 'request.setAttribute("date", date);\n'
+        javastring += 'super.forward("app/views/index.jsp", request, response);\n'
+        javastring += '}\n'
+        javastring += '}\n'
+        f = open('Index.java', 'w')
+        f.write(javastring)
+        f.close()
+        os.chdir(os.path.pardir)
         os.mkdir('models',0777)
         os.mkdir('views',0777)
         os.chdir('views')
+        jspstring = '<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>\n'
+        jspstring += '<html>\n'
+        jspstring += '<head>\n'
+        jspstring += '<title>'+ app_key +'</title>\n'
+        jspstring += '</head>\n'
+        jspstring += '<body>\n'
+        jspstring += '<h1>Welcome to '+ app_key +'.</h1>\n'
+        jspstring += '<h2>This app is powered by Othello!</h2>\n'
+        jspstring += '<p>${date}</p>\n'
+        jspstring += '</body>\n'
+        jspstring += '</html>\n'
+        f = open('index.jsp', 'w')
+        f.write(jspstring)
+        f.close()
         os.mkdir('http_status',0777)
         os.chdir('http_status')
         htmlstring = '<html>\n'
