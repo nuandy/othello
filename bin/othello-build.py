@@ -32,6 +32,10 @@ def listapps():
 
 apps_collection = listapps()
 
+def touch(fname, times = None):
+  with file(fname, 'a'):
+    os.utime(fname, times)
+
 def servletmapping():
   if base == 'othello':
     for opt, arg in options:
@@ -217,6 +221,9 @@ for opt, arg in options:
       f.close()
       if os.path.isfile('build.xml'):
         os.system('ant')
+        os.chdir('contexts')
+        touch('context.xml')
+        os.chdir(os.path.pardir)
     else:
       print 'Oops! No app by that name exists in the apps directory.'
 
