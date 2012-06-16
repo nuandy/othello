@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routes>
+    <url controller="test.app.controllers.Index">/index.jsp</url>
     <url controller="test.app.controllers.Encrypt">/encrypt.jsp</url>
     <url controller="test.app.controllers.Books">/books.jsp</url>
     <url controller="test.app.controllers.Toy">/toy.jsp</url>

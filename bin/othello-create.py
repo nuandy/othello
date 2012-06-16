@@ -39,16 +39,12 @@ def createapp():
         xmlstring += '</init-param>\n'
         xmlstring += '</servlet>\n'
         xmlstring += '<welcome-file-list>\n'
-        xmlstring += '<welcome-file>public/index.html</welcome-file>\n'
+        xmlstring += '<welcome-file>index.jsp</welcome-file>\n'
         xmlstring += '</welcome-file-list>\n'
         xmlstring += '<servlet>\n'
         xmlstring += '<servlet-name>BaseServlet</servlet-name>\n'
         xmlstring += '<servlet-class>src.main.servlet.BaseServlet</servlet-class>\n'
         xmlstring += '</servlet>\n'
-        xmlstring += '<servlet-mapping>\n'
-        xmlstring += '<servlet-name>default</servlet-name>\n'
-        xmlstring += '<url-pattern>/</url-pattern>\n'
-        xmlstring += '</servlet-mapping>\n'
         xmlstring += '<context-param>\n'
         xmlstring += '<description>Unique App Key</description>\n'
         xmlstring += '<param-name>app.key</param-name>\n'
@@ -72,7 +68,7 @@ def createapp():
         os.chdir('conf')
         xmlstring = '<?xml version="' + xml_version + '" encoding="' + encoding  + '" ?>\n'
         xmlstring += '<routes>\n'
-        xmlstring += '<!--<url controller="'+ app_key  +'.app.controllers.Index">/index.jsp</url>-->\n'
+        xmlstring += '<url controller="'+ app_key  +'.app.controllers.Index">/index.jsp</url>\n'
         xmlstring += '</routes>\n'
         f = open('routes.xml', 'w')
         f.write(xmlstring)
@@ -156,16 +152,12 @@ def createapp():
         xmlstring += '</init-param>\n'
         xmlstring += '</servlet>\n'
         xmlstring += '<welcome-file-list>\n'
-        xmlstring += '<welcome-file>public/index.html</welcome-file>\n'
+        xmlstring += '<welcome-file>index.jsp</welcome-file>\n'
         xmlstring += '</welcome-file-list>\n'
         xmlstring += '<servlet>\n'
         xmlstring += '<servlet-name>BaseServlet</servlet-name>\n'
         xmlstring += '<servlet-class>src.main.servlet.BaseServlet</servlet-class>\n'
         xmlstring += '</servlet>\n'
-        xmlstring += '<servlet-mapping>\n'
-        xmlstring += '<servlet-name>default</servlet-name>\n'
-        xmlstring += '<url-pattern>/</url-pattern>\n'
-        xmlstring += '</servlet-mapping>\n'
         xmlstring += '<context-param>\n'
         xmlstring += '<description>Unique App Key</description>\n'
         xmlstring += '<param-name>app.key</param-name>\n'
@@ -189,7 +181,7 @@ def createapp():
         os.chdir('conf')
         xmlstring = '<?xml version="' + xml_version + '" encoding="' + encoding  + '" ?>\n'
         xmlstring += '<routes>\n'
-        xmlstring += '<!--<url controller="'+ app_key  +'.app.controllers.Index">/index.jsp</url>-->\n'
+        xmlstring += '<url controller="'+ app_key  +'.app.controllers.Index">/index.jsp</url>\n'
         xmlstring += '</routes>\n'
         f = open('routes.xml', 'w')
         f.write(xmlstring)

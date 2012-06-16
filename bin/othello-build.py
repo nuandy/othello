@@ -51,17 +51,6 @@ def servletmapping():
           for node in xmldoc.getElementsByTagName('web-app'):
             for subnode in xmldoc.getElementsByTagName('servlet-mapping'):
               node.removeChild(subnode)
-          servletmapping = xmldoc.createElement('servlet-mapping')
-          servletname = xmldoc.createElement('servlet-name')
-          default = xmldoc.createTextNode('default')
-          urlpattern = xmldoc.createElement('url-pattern')
-          url = xmldoc.createTextNode('/')
-          servletname.appendChild(default)
-          urlpattern.appendChild(url)
-          servletmapping.appendChild(servletname)
-          servletmapping.appendChild(urlpattern)
-          for node in xmldoc.getElementsByTagName('web-app'):
-            node.appendChild(servletmapping)
           os.chdir(os.path.pardir)
           os.chdir('conf')
           xmldocroutes = xml.dom.minidom.parse('routes.xml')
@@ -105,17 +94,6 @@ def servletmapping():
           for node in xmldoc.getElementsByTagName('web-app'):
             for subnode in xmldoc.getElementsByTagName('servlet-mapping'):
               node.removeChild(subnode)
-          servletmapping = xmldoc.createElement('servlet-mapping')
-          servletname = xmldoc.createElement('servlet-name')
-          default = xmldoc.createTextNode('default')
-          urlpattern = xmldoc.createElement('url-pattern')
-          url = xmldoc.createTextNode('/')
-          servletname.appendChild(default)
-          urlpattern.appendChild(url)
-          servletmapping.appendChild(servletname)
-          servletmapping.appendChild(urlpattern)
-          for node in xmldoc.getElementsByTagName('web-app'):
-            node.appendChild(servletmapping)
           os.chdir(os.path.pardir)
           os.chdir('conf')
           xmldocroutes = xml.dom.minidom.parse('routes.xml')

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routes>
+    <url controller="mongo.app.controllers.Index">/index.jsp</url>
     <url controller="mongo.app.controllers.Auth">/auth.jsp</url>
     <url controller="mongo.app.controllers.Login">/login.jsp</url>
     <url controller="mongo.app.controllers.Register">/register.jsp</url>
