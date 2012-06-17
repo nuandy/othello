@@ -7,7 +7,7 @@
       <li><a href="about.jsp">About Us</a></li>
       <li>|</li>
       <li><a href="terms.jsp">Terms of Service</a></li>
-      <li>&copy; 2012 My App Powered By Othello Web Framework</li>
+      <li>&copy; 2012 Powered By Othello Web Framework</li>
     </ul>
 
   </body>

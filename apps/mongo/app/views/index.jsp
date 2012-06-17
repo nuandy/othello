@@ -2,7 +2,7 @@
 
 <jsp:include page="includes/header.jsp" />
 
-<h1>Welcome to our Website!</h1>
+<h1>Welcome to our Web Application!</h1>
 
 <p><a href="success.jsp">Try our App</a></p>
 
