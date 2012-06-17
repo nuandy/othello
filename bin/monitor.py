@@ -14,7 +14,7 @@ def get_now():
 
 def build_app():
   print >> sys.stderr, "Building app at %s" % get_now()
-  subprocess.call('python bin/othello-build.py --app=test', shell=True)
+  subprocess.call('python bin/othello-build.py --app='+sys.argv[2], shell=True)
 
 class ChangeHandler(FileSystemEventHandler):
   def on_any_event(self, event):

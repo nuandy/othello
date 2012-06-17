@@ -38,7 +38,7 @@ if base == 'othello':
           app_exists = 'false'
       if app_exists == 'true':
         subprocess.Popen('java -DSTART=' + path + '/server/start.config -jar ' + path + '/server/start.jar ' + path + '/server/config/jetty.xml', shell=True)
-        subprocess.Popen('python bin/monitor.py /web/othello/apps/'+app_key+'/app', shell=True)
+        subprocess.Popen('python bin/monitor.py /web/othello/apps/'+app_key+'/app ' + app_key, shell=True)
       else:
         sys.exit('Oops! No app by that name exists in the apps directory.')
 else:

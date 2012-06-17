@@ -5,4 +5,6 @@
     <url controller="mongo.app.controllers.Login">/login.jsp</url>
     <url controller="mongo.app.controllers.Register">/register.jsp</url>
     <url controller="mongo.app.controllers.Success">/success.jsp</url>
+    <url controller="mongo.app.controllers.About">/about.jsp</url>
+    <url controller="mongo.app.controllers.Terms">/terms.jsp</url>
 </routes>
