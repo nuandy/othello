@@ -142,6 +142,7 @@ for opt, arg in options:
     if app_exists == 'true':
       xmlstring =  '<?xml version="' + xml_version + '" encoding="' + encoding  + '" ?>\n'
       xmlstring += '<project name="othello" basedir="." default="main">\n'
+      xmlstring += '<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>\n'
       xmlstring += '<property name="othello.dir" value="framework"/>\n'
       xmlstring += '<property name="src.dir"     value="apps"/>\n'
       xmlstring += '<property name="lib.dir"     value="lib"/>\n'
@@ -162,14 +163,14 @@ for opt, arg in options:
       xmlstring += '<copy todir="${classes.dir}/${ant.project.name}">\n'
       xmlstring += '<fileset dir="${othello.dir}" excludes="**/*.java"/>\n'
       xmlstring += '</copy>\n'
-      xmlstring += '<javac source="1.6" target="1.6" srcdir="${othello.dir}" destdir="${classes.dir}/${ant.project.name}" classpathref="classpath" includeantruntime="false"/>\n'
+      xmlstring += '<javac source="1.6" target="1.6" srcdir="${othello.dir}" destdir="${classes.dir}/${ant.project.name}" classpathref="classpath" includeantruntime="false" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"/>\n'
       xmlstring += '</target>\n'
       xmlstring += '<target name="compile">\n'
       xmlstring += '<mkdir dir="${classes.dir}"/>\n'
       xmlstring += '<copy todir="${classes.dir}">\n'
       xmlstring += '<fileset dir="${src.dir}" excludes="**/*.java"/>\n'
       xmlstring += '</copy>\n'
-      xmlstring += '<javac source="1.6" target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>\n'
+      xmlstring += '<javac source="1.6" target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"/>\n'
       xmlstring += '</target>\n'
       xmlstring += '<target name="jar-framework" depends="compile-framework">\n'
       xmlstring += '<mkdir dir="${lib.dir}/${ant.project.name}"/>\n'
@@ -220,7 +221,7 @@ for opt, arg in options:
       f.write(xmlstring)
       f.close()
       if os.path.isfile('build.xml'):
-        os.system('ant')
+        os.system('ant -lib /web/othello/lib/compiler/ecj.jar')
         os.chdir('contexts')
         touch('context.xml')
         os.chdir(os.path.pardir)

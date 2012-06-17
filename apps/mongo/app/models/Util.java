@@ -1,6 +1,5 @@
 package mongo.app.models;
 
-import javax.servlet.*;
 import javax.servlet.http.*;
 
 import javax.mail.internet.InternetAddress;
