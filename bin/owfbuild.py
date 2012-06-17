@@ -3,9 +3,9 @@ import sys
 import getopt
 import xml.dom.minidom
 
-"""othello-build.py by Andy Nu nuandy@gmail.com
+"""owfbuild.py by Andy Nu nuandy@gmail.com
 This script accepts one option.
-To build a specific app in the apps directory, try: python othello-build.py --app=foo where foo is the directory name of your app.
+To build a specific app in the apps directory, try: python owfbuild.py --app=foo where foo is the directory name of your app.
 """
 
 xml_version = '1.0'
@@ -230,5 +230,5 @@ for opt, arg in options:
 
 if app_arg == '':
   print 'This script accepts one option.\n'
-  print 'To build a specific app in the apps directory, try: python othello-build.py --app=foo\n'
+  print 'To build a specific app in the apps directory, try: python owfbuild.py --app=foo\n'
   print 'where foo is the directory name of your app.\n'

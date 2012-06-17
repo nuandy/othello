@@ -46,5 +46,5 @@ else:
 
 if app_key == '':
   print 'This script accepts one option.\n'
-  print 'To start a specific app in the apps directory, try: python othello-start.py --app=foo\n'
+  print 'To start a specific app in the apps directory, try: python owfstart.py --app=foo\n'
   print 'where foo is the directory name of your app.\n'
