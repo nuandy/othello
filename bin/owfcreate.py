@@ -74,12 +74,12 @@ def createapp():
         f.write(xmlstring)
         f.close()
         os.chdir(os.path.pardir)
+        os.chdir('app')
         os.mkdir('public',0777)
         os.chdir('public')
         os.mkdir('js',0777)
         os.mkdir('css',0777)
         os.chdir(os.path.pardir)
-        os.chdir('app')
         os.mkdir('controllers',0777)
         os.chdir('controllers')
         javastring = 'package '+app_key+'.app.controllers;\n'
