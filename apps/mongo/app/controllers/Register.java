@@ -4,11 +4,6 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-
 import org.apache.log4j.*;
 import src.main.othello.web.controller.impl.AbstractControllerImpl;
 

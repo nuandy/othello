@@ -36,8 +36,7 @@ public class Util {
 
     public static String encryptCookie(User user) {
         String data = user.getId() + (System.currentTimeMillis()/1000);
-        Encryption enc = new Encryption();
-        String encrypted = enc.encrypt(data);
+        String encrypted = Encryption.encrypt(data);
         return encrypted;
     }
 

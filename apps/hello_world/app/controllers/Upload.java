@@ -12,8 +12,7 @@ public class Upload extends AbstractControllerImpl {
   private static Logger logger = Logger.getLogger(Upload.class);
 
   public static void initUpload(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-      UploadFiles upf = new UploadFiles();
-      upf.upload(request, response);
+      UploadFiles.upload(request, response);
   }
 
   public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

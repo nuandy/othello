@@ -15,6 +15,8 @@ import javax.xml.bind.Unmarshaller;
 
 public class BaseServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 37L;
+
     private static Logger logger = Logger.getLogger("BaseServlet");
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -30,8 +32,8 @@ public class BaseServlet extends HttpServlet {
                 if (method.getName().startsWith("do")) {
                     try {
                         method.invoke(object, request, response);
-                    } catch (InvocationTargetException x) {
-                        Throwable cause = x.getCause();
+                    } catch (InvocationTargetException ite) {
+                        Throwable cause = ite.getCause();
                         logger.error(cause.getMessage());
                     }
                 }

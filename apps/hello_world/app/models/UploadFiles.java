@@ -39,7 +39,7 @@ public class UploadFiles {
                     try {
                         String itemName = item.getName();
                         if (itemName.length() > 0) {
-                            File savedFile = File.createTempFile("hello-", ".jpg", new File(System.getProperty("user.dir")+"/apps/hello_world/public/images"));
+                            File savedFile = File.createTempFile("hello-", ".jpg", new File(System.getProperty("user.dir")+"/apps/hello_world/app/public/images"));
                             item.write(savedFile);
                             Insert sql = new Insert();
                             sql.insert("images", "image_path", savedFile.getPath());

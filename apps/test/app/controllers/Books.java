@@ -13,8 +13,7 @@ public class Books extends AbstractControllerImpl {
   private static Logger logger = Logger.getLogger(Books.class);
 
   public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-      JerseyClientGet client = new JerseyClientGet();
-      client.get();
+      JerseyClientGet.get();
       super.forward("app/views/books.jsp", request, response);
   }
 

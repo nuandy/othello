@@ -1,7 +1,6 @@
 package hello_world.app.models;
 
 import java.sql.*;
-import java.io.*;
 import org.apache.log4j.*;
 
 public class Insert extends Jdbc {

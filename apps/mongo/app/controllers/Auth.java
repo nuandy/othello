@@ -41,27 +41,23 @@ public class Auth extends AbstractControllerImpl {
 
   public Boolean allowed(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-      Util util = new Util();
+      String cookieValue = Util.getCookieValue(request.getCookies(), "myapptoken", "");
 
-      String cookieValue = util.getCookieValue(request.getCookies(), "myapptoken", "");
+      List<Object> results = new ArrayList<Object>();
 
-      List<Object> results = new ArrayList();
-
-      MongoDB mongo = new MongoDB();
-      mongo.connect();
-      mongo.getCollection("user");
+      MongoDB.connect();
+      MongoDB.getCollection("user");
 
       Map query = new HashMap();
       query.put("auth_token", cookieValue);
 
-      results = mongo.getDocuments(query);
+      results = MongoDB.getDocuments(query);
 
       if (!results.isEmpty()) {
 
           String result = JSON.serialize(results.get(0));
 
           Gson gson = new Gson();
-
           User user = gson.fromJson(result, User.class);
 
           if (user.getAuthToken() != null) {
@@ -79,24 +75,22 @@ public class Auth extends AbstractControllerImpl {
       String password = request.getParameter("password");
 
       if (StringUtils.isNotBlank(email) && StringUtils.isNotBlank(password)) {
-          List<Object> results = new ArrayList();
+          List<Object> results = new ArrayList<Object>();
 
-          MongoDB mongo = new MongoDB();
-          mongo.connect();
-          mongo.getCollection("user");
+          MongoDB.connect();
+          MongoDB.getCollection("user");
 
           Map query = new HashMap();
           query.put("email", email);
           query.put("password", password);
 
-          results = mongo.getDocuments(query);
+          results = MongoDB.getDocuments(query);
 
           if (!results.isEmpty()) {
 
               String result = JSON.serialize(results.get(0));
 
               Gson gson = new Gson();
-
               User user = gson.fromJson(result, User.class);
 
               if (StringUtils.isNotBlank(user.getId())) {
@@ -122,13 +116,11 @@ public class Auth extends AbstractControllerImpl {
       String fullname = request.getParameter("fullname");
       String password = request.getParameter("password");
 
-      Util util = new Util();
-
       if (StringUtils.isNotBlank(email) && StringUtils.isNotBlank(fullname) && StringUtils.isNotBlank(password)) {
 
-          if (util.validateEmail(email) == true && password.length() > 7) {
+          if (Util.validateEmail(email) == true && password.length() > 7) {
 
-              List<String> indexNames = new ArrayList();
+              List<String> indexNames = new ArrayList<String>();
               indexNames.add("email");
               indexNames.add("fullname");
 
@@ -138,16 +130,15 @@ public class Auth extends AbstractControllerImpl {
               document.put("status", 1);
               document.put("password", password);
 
-              MongoDB mongo = new MongoDB();
-              mongo.connect();
-              mongo.getCollection("user");
-              mongo.setIndex(indexNames);
-              mongo.setDocument(document);
+              MongoDB.connect();
+              MongoDB.getCollection("user");
+              MongoDB.setIndex(indexNames);
+              MongoDB.setDocument(document);
 
               request.setAttribute("registered", true);
               super.forward("app/views/login.jsp", request, response);
 
-          } else if (util.validateEmail(email) == false) {
+          } else if (Util.validateEmail(email) == false) {
               request.setAttribute("bad_email", true);
               super.forward("app/views/register.jsp", request, response);
           } else if (password.length() < 8) {
@@ -173,8 +164,7 @@ public class Auth extends AbstractControllerImpl {
   }
 
   public static void setUserCookie(User user, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-      Util util = new Util();
-      String data = util.encryptCookie(user);
+      String data = Util.encryptCookie(user);
 
       Cookie userCookie = new Cookie("myapptoken", data);
       userCookie.setMaxAge(3600);
@@ -188,10 +178,9 @@ public class Auth extends AbstractControllerImpl {
       document.put("created_at", user.getCreatedAt());
       document.put("auth_token", data);
 
-      MongoDB mongo = new MongoDB();
-      mongo.connect();
-      mongo.getCollection("user");
-      mongo.updateDocumentByEmail(user.getEmail(), document);
+      MongoDB.connect();
+      MongoDB.getCollection("user");
+      MongoDB.updateDocumentByEmail(user.getEmail(), document);
   }
 
 }

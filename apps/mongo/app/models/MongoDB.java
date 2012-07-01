@@ -60,7 +60,7 @@ public class MongoDB {
 
     public static List<Object> getDocuments(Map<String, ?> data) {
 
-	      List<Object> results = new ArrayList();
+	      List<Object> results = new ArrayList<Object>();
 
 	      BasicDBObject query = new BasicDBObject();
 
@@ -78,7 +78,7 @@ public class MongoDB {
     }
 
     public static List<String> getCollectionNames(DB db) {
-        List<String> collections = new ArrayList();
+        List<String> collections = new ArrayList<String>();
         Set<String> colls = db.getCollectionNames();
 
         for (String s : colls) {

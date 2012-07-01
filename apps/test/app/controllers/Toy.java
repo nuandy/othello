@@ -14,10 +14,8 @@ public class Toy extends AbstractControllerImpl {
     private static Logger logger = Logger.getLogger(Toy.class);
 
     public void doMain(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ToyToXml toy = new ToyToXml();
-        toy.transform();
-        XmlToToy xml = new XmlToToy();
-        String name = xml.transform();
+        ToyToXml.transform();
+        String name = XmlToToy.transform();
         request.setAttribute("toyName", name);
         super.forward("app/views/toy.jsp", request, response);
     }
