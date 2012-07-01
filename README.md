@@ -1,6 +1,7 @@
 Othello is a Java MVC web framework.
 
-Minimum Requirements: Java 6 (Othello incorporates Java 6 features), Python 2.5
+* Minimum Requirements: Java 6 (Othello incorporates Java 6 features), Python 2.5
+* Tested on: Fedora Linux, SUSE Linux, Ubuntu Linux and MAC OS X.
 
 Some features of Othello:
 
