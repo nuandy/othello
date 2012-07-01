@@ -220,7 +220,7 @@ for opt, arg in options:
       f.write(xmlstring)
       f.close()
       if os.path.isfile('build.xml'):
-        os.system(path + '/ant/bin/ant -lib ' + path + '/lib/compiler/ecj.jar')
+        os.system(path + '/bin/ant/bin/ant -lib ' + path + '/lib/compiler/ecj.jar')
         os.chdir('contexts')
         touch('context.xml')
         os.chdir(os.path.pardir)
