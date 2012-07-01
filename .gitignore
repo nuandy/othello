@@ -3,7 +3,6 @@ build
 build.xml
 release
 server/logs
-lib/othello
 *.iml
 *.swo
 *.swp
