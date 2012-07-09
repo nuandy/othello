@@ -49,7 +49,10 @@ f = open('build.xml', 'w')
 f.write(xmlstring)
 f.close()
 if os.path.isfile('build.xml'):
-  os.system(path + '/bin/ant/bin/ant -lib ' + path + '/lib/compiler/ecj.jar')
-  os.chdir('contexts')
-  touch('context.xml')
-  os.chdir(os.path.pardir)
+  if base == 'othello':
+    os.system(path + '/bin/ant/bin/ant -lib ' + path + '/lib/compiler/ecj.jar')
+    os.chdir('contexts')
+    touch('context.xml')
+    os.chdir(os.path.pardir)
+  else:
+    sys.exit("Oops! This script must be run within the root/top level othello directory!")

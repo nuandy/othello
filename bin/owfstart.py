@@ -4,9 +4,15 @@ import subprocess
 import getopt
 import re
 
+"""owfstart.py by Andy Nu nuandy@gmail.com
+This script accepts two options. The first option (--app) is required while the second option (--ssl) is optional.
+To start a specific app in the apps directory, try: python owfstart.py --app=foo where foo is the directory name of your app.
+To start an app with SSL, try: python owfstart.py --app=foo --ssl.
+"""
+
 app_key = ''
 
-options, extraparams = getopt.getopt(sys.argv[1:], '', ['app='])
+options, extraparams = getopt.getopt(sys.argv[1:], '', ['app=', 'ssl'])
 
 path = os.path.realpath('.')
 base = os.path.basename(path)
@@ -16,12 +22,8 @@ def listapps():
     os.chdir(os.path.abspath(os.curdir)+'/apps')
     apps = [name for name in os.listdir('.') if os.path.isdir(name)]
     os.chdir(os.path.pardir)
-  elif base == 'bin':
-    os.chdir(os.path.pardir+'/apps')
-    apps = [name for name in os.listdir('.') if os.path.isdir(name)]
-    os.chdir(os.path.pardir)
   else:
-    sys.exit("Oops! This script must be run within the root/top level othello directory or othello/bin!")
+    sys.exit("Oops! This script must be run within the root/top level othello directory!")
   return apps
 
 def process_exists(process_name):
@@ -53,7 +55,11 @@ if base == 'othello':
         else:
           app_exists = 'false'
       if app_exists == 'true':
-        start_command = 'java -DSTART=' + path + '/server/start.config -jar ' + path + '/server/start.jar ' + path + '/server/config/jetty.xml'
+        for opt, arg in options:
+          if opt in ('--ssl'):
+            start_command = 'java -DSTART=' + path + '/server/start.config -jar ' + path + '/server/start.jar ' + path + '/server/config/jetty.xml ' + path + '/server/config/jetty-ssl.xml'
+          else:
+            start_command = 'java -DSTART=' + path + '/server/start.config -jar ' + path + '/server/start.jar ' + path + '/server/config/jetty.xml'
         monitor_command = 'python bin/monitor.py ' + path + '/apps/'+app_key+'/app ' + app_key
         start_pid = process_exists(start_command)
         monitor_pid = process_exists(monitor_command)
@@ -79,6 +85,7 @@ else:
   sys.exit('Oops! This script must be run at the root/top level othello directory!')
 
 if app_key == '':
-  print 'This script accepts one option.\n'
+  print 'This script accepts one required option (--app).\n'
   print 'To start a specific app in the apps directory, try: python owfstart.py --app=foo\n'
   print 'where foo is the directory name of your app.\n'
+  print 'To start an app that supports SSL, try: python owfstart.py --app=foo --ssl\n'
