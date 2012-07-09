@@ -17,7 +17,7 @@ def build_app():
   subprocess.call('python bin/owfbuild.py --app='+sys.argv[2], shell=True)
 
 class ChangeHandler(FileSystemEventHandler):
-  def on_any_event(self, event):
+  def on_modified(self, event):
     build_app()
 
 def main():
