@@ -2,6 +2,7 @@ import os
 import sys
 import getopt
 import xml.dom.minidom
+from owfcontext import write_context
 
 """owfbuild.py by Andy Nu nuandy@gmail.com
 This script accepts one option.
@@ -27,10 +28,6 @@ def listapps():
   return apps
 
 apps_collection = listapps()
-
-def touch(fname, times = None):
-  with file(fname, 'a'):
-    os.utime(fname, times)
 
 def servletmapping():
   if base == 'othello':
@@ -160,9 +157,7 @@ for opt, arg in options:
       f.close()
       if os.path.isfile('build.xml'):
         os.system(path + '/bin/ant/bin/ant -lib ' + path + '/lib/compiler/ecj.jar')
-        os.chdir('contexts')
-        touch('context.xml')
-        os.chdir(os.path.pardir)
+        write_context(path, app_arg)
     else:
       print 'Oops! No app by that name exists in the apps directory.'
 
