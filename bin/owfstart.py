@@ -3,6 +3,7 @@ import os
 import subprocess
 import getopt
 import re
+from owfcontext import war_path, write_context
 
 """owfstart.py by Andy Nu nuandy@gmail.com
 This script accepts two options. The first option (--app) is required while the second option (--ssl) is optional.
@@ -55,6 +56,9 @@ if base == 'othello':
         else:
           app_exists = 'false'
       if app_exists == 'true':
+        if not os.path.isfile(war_path(path, app_key)):
+          print 'Warning: ' + app_key + ' has not been built yet. Run: python bin/owfbuild.py --app=' + app_key
+        write_context(path, app_key)
         start_command = 'java -DSTART=' + path + '/server/start.config -jar ' + path + '/server/start.jar ' + path + '/server/config/jetty.xml'
         if '--ssl' in [o for o, a in options]:
           start_command += ' ' + path + '/server/config/jetty-ssl.xml'
