@@ -26,21 +26,34 @@ public class BaseServlet extends HttpServlet {
     public void invokeDo(HttpServletRequest request, HttpServletResponse response, String httpMethod, String pattern) throws IOException, ServletException {
         try {
             Class appController = Class.forName(getClassName(pattern));
-            Method[] methods = appController.getMethods();
+            Method handler = findHandler(appController, httpMethod);
+            if (handler == null) {
+                response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                return;
+            }
             Object object = appController.newInstance();
-            for (Method method : methods) {
-                if (method.getName().startsWith("do")) {
-                    try {
-                        method.invoke(object, request, response);
-                    } catch (InvocationTargetException ite) {
-                        Throwable cause = ite.getCause();
-                        logger.error(cause.getMessage());
-                    }
-                }
+            try {
+                handler.invoke(object, request, response);
+            } catch (InvocationTargetException ite) {
+                Throwable cause = ite.getCause();
+                logger.error(cause.getMessage());
             }
         } catch (Exception e) {
             logger.error(e);
         }
+    }
+
+    // A controller handles a request with do<Method> (doGet, doPost, ...) when it has one, otherwise with doMain.
+    static Method findHandler(Class<?> controller, String httpMethod) {
+        String specific = "do" + httpMethod.substring(0, 1) + httpMethod.substring(1).toLowerCase();
+        for (String name : new String[] {specific, "doMain"}) {
+            try {
+                return controller.getMethod(name, HttpServletRequest.class, HttpServletResponse.class);
+            } catch (NoSuchMethodException e) {
+                // try the next name
+            }
+        }
+        return null;
     }
 
     private String getClassName(String pattern) {
