@@ -55,11 +55,9 @@ if base == 'othello':
         else:
           app_exists = 'false'
       if app_exists == 'true':
-        for opt, arg in options:
-          if opt in ('--ssl'):
-            start_command = 'java -DSTART=' + path + '/server/start.config -jar ' + path + '/server/start.jar ' + path + '/server/config/jetty.xml ' + path + '/server/config/jetty-ssl.xml'
-          else:
-            start_command = 'java -DSTART=' + path + '/server/start.config -jar ' + path + '/server/start.jar ' + path + '/server/config/jetty.xml'
+        start_command = 'java -DSTART=' + path + '/server/start.config -jar ' + path + '/server/start.jar ' + path + '/server/config/jetty.xml'
+        if '--ssl' in [o for o, a in options]:
+          start_command += ' ' + path + '/server/config/jetty-ssl.xml'
         monitor_command = 'python bin/monitor.py ' + path + '/apps/'+app_key+'/app ' + app_key
         start_pid = process_exists(start_command)
         monitor_pid = process_exists(monitor_command)
