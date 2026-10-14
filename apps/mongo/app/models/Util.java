@@ -14,6 +14,10 @@ public class Util {
     private static Logger logger = Logger.getLogger(Util.class);
 
     public static String getCookieValue(Cookie[] cookies, String cookieName, String defaultValue) {
+        // getCookies() is null, not empty, when the request carries no cookies
+        if (cookies == null) {
+            return defaultValue;
+        }
         for(Cookie cookie : cookies) {
             if (cookieName.equals(cookie.getName())) {
                 return(cookie.getValue());
